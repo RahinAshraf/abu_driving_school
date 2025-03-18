@@ -1,0 +1,149 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Welcome to Abu Driving School. We provide expert driving lessons for beginners and advanced learners in Hertfordshire and St Albans.">
+    <meta name="keywords" content="driving school, driving lessons, safe driving, Abu Driving School, St Albans, Hertfordshire">
+    <meta name="author" content="Abu Driving School">
+    <meta name="robots" content="index, follow">
+    <title>Sign Up</title>
+
+    <!-- Larger Favicon for Google Search Results -->
+    <link rel="icon" type="image/png" href="{% static 'favicon-192x192.png' %}" sizes="192x192">
+    <link rel="apple-touch-icon" href="{% static 'favicon-180x180.png' %}">
+
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            position: relative; /* Set to relative to position the link inside it */
+            max-width: 450px; /* Increase container width to make input fields longer */
+            margin: auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Back to Home link styling */
+        .back-link {
+            position: absolute;
+            top: 20px; /* Adjusted positioning for spacing */
+            left: 20px;
+            color: #fa7416; /* Changed to orange */
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            color: #cc8400; /* Darker orange for hover effect */
+        }
+
+        h1 {
+            text-align: center; /* Center-align header */
+            color: black;
+            font-family: 'Courier New', Courier, monospace;
+            margin-top: 35px; /* Increased margin-top to create space below the link */
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 12px;
+            background-color: #fa7416; /* Changed to orange */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 18px; /* Increased font size */
+            margin-top: 15px; /* Added gap between input fields and buttons */
+        }
+
+        button:hover {
+            background-color: #cc8400; /* Darker orange for hover */
+        }
+
+        .error {
+            color: red;
+            text-align: center;
+        }
+
+        .login-link {
+            display: inline-block;
+            padding: 12px;
+            background-color: #fa7416; /* Changed to orange */
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            text-align: center;
+            width: 100%;
+            box-sizing: border-box;
+            margin-top: 15px; /* Added spacing between buttons */
+        }
+
+        .login-link:hover {
+            background-color: #cc8400; /* Darker orange for hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Back to Home link -->
+        <a href="{% url 'abu' %}" class="back-link">Back to Home</a>
+
+        <h1>Sign Up</h1>
+
+        <!-- Display error messages only if the form submission has errors -->
+        {% if form.errors %}
+            <div class="error">
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <!-- Sign-up form -->
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <input type="text" name="username" placeholder="Username" value="{{ form.username.value }}" required>
+            </div>
+            <div class="form-group">
+                <input type="email" name="email" placeholder="Email" value="{{ form.email.value }}" required>
+            </div>
+            <div class="form-group">
+                <input type="password" name="password" placeholder="Password" required>
+            </div>
+            <button type="submit">Sign Up</button>
+        </form>
+
+        <!-- "Already have an account" link styled as a button -->
+        <a href="{% url 'login' %}" class="login-link">Already have an account? Login here</a>
+    </div>
+</body>
+</html>

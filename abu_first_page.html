@@ -1,0 +1,103 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Welcome to Abu Driving School. We provide expert driving lessons for beginners and advanced learners in Hertfordshire and St Albans.">
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon-32x32.ico' %}">
+    <title>Simple Webpage</title>
+
+    <!-- Larger Favicon for Google Search Results -->
+    <link rel="icon" type="image/png" href="{% static 'favicon-192x192.png' %}" sizes="192x192">
+    <link rel="apple-touch-icon" href="{% static 'favicon-180x180.png' %}">
+
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        .contact-header {
+            background-color: #FF0000; /* Red color */
+            color: white;
+            padding: 0.2em 1em; /* Very thin height */
+            text-align: left;
+            display: flex;
+            align-items: center;
+        }
+        .contact-header img {
+            width: 16px;
+            height: 16px;
+            margin-right: 0.5em;
+        }
+        .main-header {
+            background-color: #000000; /* Black color */
+            color: white;
+            padding: 0.5em 0; /* Normal height */
+            text-align: center;
+        }
+        nav {
+            margin: 0;
+            padding: 1em;
+            background-color: #333;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            margin: 0 1em;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        main {
+            padding: 1em;
+            background-color: white;
+            margin: 1em;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1em 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <header class="contact-header">
+        <img src="phone.png" alt="Phone Icon">
+        <span>123-456-7890</span>
+    </header>
+    <header class="main-header">
+        <h1>Welcome to Abu's Driving School</h1>
+    </header>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+    </nav>
+    <main>
+        <h2>Home</h2>
+        <p>This is a simple webpage created using HTML and CSS. You can add more content and customize it as per your needs.</p>
+        
+        <h2 id="about">About</h2>
+        <p>This section can contain information about you or your website. Feel free to modify the content and style.</p>
+        
+        <h2 id="contact">Contact</h2>
+        <p>You can add your contact information here. For example:</p>
+        <ul>
+            <li>Email: example@example.com</li>
+            <li>Phone: 123-456-7890</li>
+        </ul>
+    </main>
+    <footer>
+        <p>&copy; 2024 My Simple Webpage. All rights reserved.</p>
+    </footer>
+</body>
+</html>

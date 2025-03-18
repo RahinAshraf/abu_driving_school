@@ -1,0 +1,28 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Welcome to Abu Driving School. We provide expert driving lessons for beginners and advanced learners in Hertfordshire and St Albans.">
+    <meta name="keywords" content="driving school, driving lessons, safe driving, Abu Driving School, St Albans, Hertfordshire">
+    <meta name="author" content="Abu Driving School">
+    <meta name="robots" content="index, follow">
+    <title>Register</title>
+
+    <!-- Larger Favicon for Google Search Results -->
+    <link rel="icon" type="image/png" href="{% static 'favicon-192x192.png' %}" sizes="192x192">
+    <link rel="apple-touch-icon" href="{% static 'favicon-180x180.png' %}">
+
+    
+</head>
+<body>
+    <h2>Sign Up</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}  <!-- Render the form fields -->
+        <button type="submit">Register</button>
+    </form>
+</body>
+</html>

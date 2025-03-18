@@ -1,0 +1,857 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Welcome to Abu Driving School. We provide expert driving lessons for beginners and advanced learners in Hertfordshire and St Albans.">
+    <meta name="keywords" content="driving school, driving lessons, safe driving, Abu Driving School, St Albans, Hertfordshire">
+    <meta name="author" content="Abu Driving School">
+    <meta name="robots" content="index, follow">
+    <meta name="google-site-verification" content="ipfqwvMlwDMcOeOrsolFeLlhqAXGrVXDe0AYUd_LMwA" />
+    <title>Abu Driving School</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+
+    <!-- Larger Favicon for Google Search Results -->
+    <link rel="icon" type="image/png" href="{% static 'favicon-192x192.png' %}" sizes="192x192">
+    <link rel="apple-touch-icon" href="{% static 'favicon-180x180.png' %}">
+
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+        }
+
+        html {
+        scroll-behavior: smooth;
+        }
+
+
+        .full-screen-image {
+            width: 100%;
+            height: 100vh;
+            object-fit: cover;
+            display: block;
+        }
+
+        .content {
+            padding: 20px;
+            background-color: white;
+            text-align: center;
+        }
+
+        .container {
+            position: relative;
+            min-height: 100vh;
+        }
+
+        .logo {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 10;
+            width: 22vw;
+            height: auto;
+            border-radius: 15px; /* Rounded edges for the image */
+        }
+
+        @media (max-width: 600px) {
+            .logo {
+                width: 50vw;
+                top: 10px;
+                right: 10px;
+                border-radius: 15px; /* Slightly more rounded edges on smaller screens */
+            }
+        }
+
+        .buttons-container {
+            position: absolute;
+            top: 50%;
+            left: 20px;
+            transform: translateY(-50%);
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .buttons-container button {
+            background-color: #f27c05;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 150px;
+        }
+
+        .buttons-container button:hover {
+            background-color: #fcc083;
+        }
+
+        @media (max-width: 600px) {
+            .buttons-container button {
+                width: 120px;
+            }
+        }
+
+        /* For larger screens (tablets, laptops, desktops) */
+        @media (min-width: 768px) {
+            .buttons-container button {
+                width: 350px;  /* Increase button width on larger screens */
+                height: 50px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .buttons-container {
+            position: absolute;
+            top: 50%;
+            left: 20px;
+            transform: translateY(-50%);
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        }
+
+        /* For larger screens (tablets, laptops, desktops) */
+        @media (min-width: 768px) {
+            .buttons-container {
+                position: absolute;
+                top: 50%;
+                left: 20px;
+                transform: translateY(-50%);
+                z-index: 10;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                padding-left: 50px;  /* Add padding to the left of the container */
+            }
+        }
+
+        .carousel-container {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Carousel list */
+        .carousel {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            overflow: hidden; /* Prevent extra items from showing */
+        }
+
+        /* Carousel cards */
+        .card {
+            flex: 0 0 100%; /* Each card takes 100% of the wrapper's width */
+            box-sizing: border-box; /* Ensure padding is included in width */
+            padding: 20px;
+            text-align: center;
+            background-color: #FFFF00;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .carousel img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .dot {
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            margin: 0 5px;
+            background-color: #bbb;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .active {
+            background-color: #717171;
+        }
+
+        /* Ensure wrapper styling maintains 100% width */
+        .wrapper {
+            max-width: 100%;
+            width: 100%;
+            position: relative;
+            display: flex;
+            justify-content: center; /* Centers the carousel */
+        }
+
+        .wrapper i {
+            height: 50px;
+            width: 50px;
+            background: rgb(118, 233, 118);
+            text-align: center;
+            line-height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            font-size: 1.25rem;
+            transform: translateY(-50%);
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.23);
+        }
+
+        .wrapper i:first-child {
+            left: -22px;
+        }
+
+        .wrapper i:last-child {
+            right: -22px;
+        }
+
+        .wrapper .carousel {
+            width: 70%; /* Set carousel width to 70% of its container */
+            margin-left: 15%; /* Add 15% margin to the left */
+            margin-right: 15%; /* Add 15% margin to the right */
+            display: grid;
+            grid-auto-flow: column;
+            grid-auto-columns: 100%;
+            gap: 0; /* Remove gap for smooth alignment */
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            scrollbar-width: none; /* Hide scrollbar for cleaner look */
+        }
+
+        .carousel::-webkit-scrollbar {
+            display: none;
+        }
+
+        .carousel :where(.card, .img) {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carousel.dragging {
+            scroll-snap-type: none;
+            scroll-behavior: auto;
+        }
+
+        .carousel.no-transition {
+            scroll-behavior: auto;
+        }
+
+        .carousel.dragging .card {
+            cursor: grab;
+            user-select: none;
+        }
+
+        .carousel .card {
+            position: relative; /* Ensure arrows are positioned within */
+            height: 340px;
+            list-style: none;
+            background: #fff;
+            border-radius: 8px;
+            display: flex;
+            cursor: pointer;
+            width: 100%;
+            padding-bottom: 15px;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .card .img {
+            background: green;
+            width: 145px;
+            height: 145px;
+            border-radius: 50%;
+        }
+
+        .card .img img {
+            width: 140px;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid #fff;
+        }
+
+        .card h2 {
+            font-weight: bold;
+            color: #24221c;
+            font-size: 1.6rem;
+            margin: 0 0 35px 0;
+            align-self: flex-start;
+            text-align: center;
+            width: 100%;
+        }
+
+        .card span {
+            color: #6a6d78;
+            font-size: 1.31rem;
+        }
+
+        @media screen and (max-width: 900px) {
+            .wrapper .carousel {
+                width: 70%; /* Increase width to 90% for smaller screens */
+                margin-left: 5%; /* Reduce margins for smaller screens */
+                margin-right: 5%;
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            .wrapper .carousel {
+                width: 70%; /* Full width for very small screens */
+                margin-left: 0; /* Remove side margins */
+                margin-right: 0;
+            }
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px 0; /* 20px for top and bottom padding, 0 for left and right padding */
+            background-color: #808080;
+            color: #FFFFFF;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+
+
+        /* Contact Section Styling */
+#contact {
+    padding: 60px 20px;
+    background-color: #eda758; /* Light silver background for contrast */
+    color: black; /* Text color */
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+}
+
+#contact h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+    color: black; /* Black for the main heading */
+}
+
+.contact-card {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Spacing between tiles */
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.contact-info-tile {
+    background: #f0cda5; /* Grey for the tile background */
+    border: 2px solid silver; /* Subtle silver border */
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+    text-align: left; /* Align content inside each tile */
+}
+
+.contact-info-tile h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: black; /* Black for tile headings */
+}
+
+.contact-info-tile p {
+    margin: 0 0 10px;
+    line-height: 1.6;
+    color: black; /* Ensure text is black for readability */
+    
+}
+
+.contact-info-tile a.contact-link {
+    color: black; /* Black for links */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.contact-info-tile a {
+    color: black; /* Black text color */
+    text-decoration: underline; /* Add underline */
+    text-decoration-color: black; /* Ensure the underline is black */
+    font-weight: bold; /* Bold styling */
+}
+
+.contact-info-tile a:hover {
+    color: silver; /* Silver hover effect */
+    text-decoration: underline; /* Keep underline on hover */
+    text-decoration-color: silver; /* Underline turns silver on hover */
+}
+
+
+.contact-info-tile a.contact-link:hover {
+    color: silver; /* Silver hover effect */
+    text-decoration: underline; /* Subtle hover effect */
+}
+
+/* Responsive Layout */
+@media (min-width: 768px) {
+    .contact-card {
+        flex-direction: row; /* Align tiles horizontally */
+        justify-content: space-between;
+        flex: 0 1 30%;
+    }
+
+    .contact-info-tile {
+        flex: 1; /* Make each tile equal in width */
+        margin: 0 10px; /* Spacing between tiles */
+    }
+}
+
+
+.contact-detail {
+    color: black; /* Ensure text is black */
+    font-weight: bold; /* Make the text bold */
+}
+
+
+
+/* Style for carousel navigation arrows */
+.carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    transition: background-color 0.3s;
+}
+
+.carousel-arrow:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.left-arrow {
+    left: 15px;
+}
+
+.right-arrow {
+    right: 15px;
+}
+
+
+/* Collapsible Header */
+    .collapsible-header {
+        font-size: 2rem;
+        cursor: pointer;
+        background-color: #f2f2f2;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    /* Collapsible Content */
+    .collapsible-content {
+        display: none;
+        padding: 10px;
+        background-color: #fafafa;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin-top: 10px;
+    }
+
+    /* Sub-Headers */
+    .sub-header {
+        font-size: 1.5rem;
+        margin-top: 15px;
+    }
+
+
+.about-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f7dfc8;
+}
+
+    /* Interactive Map */
+    #map {
+        height: 400px;
+        width: 100%;
+    }
+
+
+    .home-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fac28c;
+}
+
+.main-header {
+    font-size: 2em;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center; /* Center the text */
+}
+
+
+li {
+    margin-bottom: 10px; /* Increase the space between bullet points */
+}
+
+
+@media (min-width: 768px) {
+    li {
+        font-size: 1.25rem; /* Increase the font size for bullet points */
+    }
+    ul {
+        font-size: 1.2rem; /* Increase the font size of list items */
+    }
+    p {
+        font-size: 1.2rem; /* Increase the font size of all text inside p tags */
+    }
+}
+    .banner {
+        background-color: black;
+        color: white;
+        text-align: center;
+        position: fixed; /* Keeps the banner visible when scrolling */
+        top: 0;
+        z-index: 1000; /* Ensures it stays on top of other elements */
+        font-family: Arial, sans-serif;
+        width: 100vw; /* Makes the banner span the entire viewport width */
+        height: 60px; /* Define a fixed height for the banner */
+
+
+    }
+    .banner h2 {
+        margin: 0;
+        font-size: 20px;
+        letter-spacing: 2px;
+        line-height: 60px; /* Ensures text is vertically centered within the banner */
+
+    }
+
+/* General Section Styling */
+.section {
+    padding: 20px;
+}
+
+/* Container for student profiles */
+.students-container {
+    text-align: center;
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Each student box */
+.student {
+    flex: 1;
+    text-align: center;
+    min-height: 400px; /* Ensures all boxes have the same height */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background: #f8f8f8; /* Light background to make them stand out */
+    border-radius: 10px;
+    overflow: hidden; /* Prevents any content from overflowing */
+}
+
+/* Default Image Styling (Laptops & Large Screens) */
+.student img {
+    width: 100%;
+    max-height: 300px; /* Prevents overly large images */
+    object-fit: contain; /* Ensures full image is displayed */
+    border-radius: 10px;
+    display: block;
+    background-color: white; /* Adds a background in case images are transparent */
+}
+
+/* Mobile: Keep images' original aspect ratio and prevent height change */
+@media (max-width: 768px) {
+    .students-container {
+        flex-direction: column; /* Stack images on mobile */
+    }
+
+    .student {
+        width: 100%;
+    }
+
+    .student img {
+        width: 100%; /* Make the image fill the container width */
+        height: auto; /* Maintain the image's original height and aspect ratio */
+    }
+}
+
+
+.image-container {
+    display: flex;               /* Enable flexbox */
+    justify-content: center;     /* Center horizontally */
+    align-items: center;         /* Center vertically */
+    height: 100%;                 /* Ensure the container takes full height (optional, depending on your layout) */
+}
+
+/* Default image size for smaller screens (mobile/tablet) */
+.image-container img {
+    width: 100%;         /* Makes image responsive */
+    height: auto;        /* Maintain aspect ratio */
+}
+
+/* Make image much smaller on laptop screens */
+@media (min-width: 1024px) {  /* Targeting screens wider than 1024px, typically laptops */
+    .image-container img {
+        width: 30%;       /* Set width to 50% of the container */
+        height: auto%;     /* Maintain aspect ratio */
+    }
+}
+
+
+
+
+
+
+
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const links = document.querySelectorAll('nav a');
+            const card = document.querySelector('.card');
+
+            links.forEach(link => {
+                link.addEventListener('click', function (event) {
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetSection = document.getElementById(targetId);
+
+                    if (targetSection) {
+                        event.preventDefault();
+                        card.scrollTop = targetSection.offsetTop - card.offsetTop;
+                    }
+                });
+            });
+        });
+    </script>
+
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- Buttons at the bottom left -->
+        <div class="buttons-container">
+            <button onclick="smoothScroll('#home')">Home</button>
+            <button onclick="smoothScroll('#about')">About</button>
+            <button onclick="smoothScroll('#OurStudents')">Our Students</button>
+            <button onclick="smoothScroll('#contact')">Contact Us</button>
+
+            <button onclick="location.href='{% url 'reviews' %}'">Reviews</button>
+
+            {% if user.is_authenticated %}
+                <button onclick="location.href='{% url 'profile' %}'">My Profile</button>
+                <button onclick="location.href='{% url 'logout' %}'">Logout</button>
+            {% else %}
+                <button onclick="location.href='{% url 'signup' %}'">Sign Up</button>
+                <button onclick="location.href='{% url 'login' %}'">Login</button>
+            {% endif %}
+
+            {% if user.email == "Abu@gmail.com" %} <!-- UPDATE THIS TO USE YOUR REAL PERSONAL EMAIL --> 
+                <button onclick="location.href='https://github.com/RahinAshraf/ash_driving_school.git'">
+                    Code Repository
+                </button>
+            {% endif %}
+        </div>
+
+        <!-- Logo image at top center -->
+        <img src="{% static 'logo2.jpg' %}" alt="Logo" class="logo">
+
+        <!-- Full-screen background image -->
+        <img src="{% static 'shush.png' %}" alt="Full Screen Image" class="full-screen-image">
+
+        <!-- Content underneath the image -->
+        <div class="content">
+            <h1 style="color: #919090; font-family: 'Courier New', Courier, monospace;">Start your journey to confident driving with Abu Driving School!</h1>
+        </div>
+    </div>
+
+     <main id="content">
+
+        <section id="home" class="section" style="background-color: #fac28c;">
+    <div class="home-container">
+        <h2 class="main-header">Home</h2>
+        <p>
+            Welcome to Abu Driving School, where we offer top-notch driving lessons tailored to your needs.
+            Whether you're a beginner or looking to brush up on your skills, we're here to help you become a confident and skilled driver.
+        </p>
+
+        <h3 class="sub-header">Why Choose Us?</h3>
+        <ul>
+            <li><b>Experienced Instructor:</b> Abu is an approved driving instructor with many years of experience.</li>
+            <li><b>Flexible Scheduling:</b> We offer lessons at times that suit you, including evenings and weekends.</li>
+            <li><b>Affordable Rates:</b> Competitive pricing with no hidden fees.</li>
+            <li><b>Modern Vehicles:</b> Learn to drive in well-maintained, comfortable vehicles.</li>
+        </ul>
+    </div>
+</section>
+        <section id="about" class="section" style="background-color: #f7dfc8;">
+    <div class="about-container">
+        <!-- About Section Header -->
+        <h2 class="main-header">About</h2>
+        <p>
+            Abu's Driving School has been serving the local community for many years. Our mission is to provide high-quality driving instruction that is both informative and enjoyable. 
+            We are committed to helping each student achieve their driving goals and pass their driving test with confidence.
+        </p>
+
+        <!-- Meet Abu Section -->
+        <h3 class="sub-header">Meet Abu</h3>
+        <p>
+            Abu is a fully qualified and highly experienced driving instructor with a passion for teaching. 
+            Having helped hundreds of students pass their driving tests, Abu combines a thorough understanding of driving principles with a friendly and supportive teaching style.
+        </p>
+
+        <!-- Our Vehicles Section -->
+        <h3 class="sub-header">Our Vehicles</h3>
+        <p>
+            Our fleet includes a range of modern, well-maintained vehicles equipped with dual controls for your safety. 
+            Whether you prefer a manual or automatic transmission, we have the right vehicle to suit your needs.
+        </p>
+        <div class="image-container">
+            <img src="{% static 'carSame.jpg' %}">
+        </div>
+
+
+
+        <!-- Our Location Section -->
+        <h3 class="sub-header">Our Location</h3>
+        <p>
+            We are based in St Albans &amp; Welwyn Garden City, two beautiful towns in Hertfordshire. 
+            Check out our locations on the map below!
+        </p>
+        <!-- Interactive Map Section -->
+<div id="map" style="height: 400px; width: 100%; margin-top: 20px;"></div>
+
+<!-- Mapbox CSS & JS -->
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Replace with your actual Mapbox access token
+        mapboxgl.accessToken = 'pk.eyJ1IjoicmFoaW4wMiIsImEiOiJjbThhOHMyZXcxZDN5MnhzYzcycGFkeTJwIn0.U3L_6EUIsD1VmuqjrAwBYg';
+
+        // Initialize the Mapbox map
+        const map = new mapboxgl.Map({
+            container: 'map', // ID of the div
+            style: 'mapbox://styles/mapbox/streets-v11', // Map style
+            center: [-0.2718, 51.7782], // St Albans coordinates
+            zoom: 10, // Zoom level
+            attributionControl: false // Disable attribution
+        });
+
+        // Add navigation controls (zoom & rotation)
+        map.addControl(new mapboxgl.NavigationControl());
+
+        // Function to add markers
+        function addMarker(coords, popupText) {
+            new mapboxgl.Marker()
+                .setLngLat(coords)
+                .setPopup(new mapboxgl.Popup().setHTML(`<b>${popupText}</b>`))
+                .addTo(map);
+        }
+
+        // Add markers for St Albans and Hatfield
+        addMarker([-0.335056, 51.752643], "We are based in St Albans");
+        addMarker([-0.20855686113062374, 51.803775472981485], "We are based in Welwyn Garden City");
+    });
+</script>
+
+    </div>
+</section>
+
+<section id="OurStudents" class="section">
+    <h2 class="main-header">Our Students</h2>
+    <p style="text-align: center;"><b>Meet some of our students who passed their driving tests with us!</b></p>
+    <div class="students-container">
+        <div class="student">
+            <img src="{% static 'student1.png' %}" alt="Student 1">
+            <p>Congratulations, Olawale Jaiyeola, on passing your test this morning in St. Albans! Well done, Olawale, great job, mate. I wish you all the best for the future, and thank you for choosing Abu as your driving instructor. Good luck for the future, and stay safe on the road at all times!</p>
+        </div>
+        <div class="student">
+            <img src="{% static 'student2.png' %}" alt="Student 2">
+            <p>Congratulations, Gihani Ramdani, on passing your test this afternoon in St. Albans on your first attempt with only 3 driver faults. Well done, Gihani! I'm very happy for you. Thank you for choosing Abu as your driving instructor. I wish you all the best for the future!</p>
+        </div>
+        <div class="student">
+            <img src="{% static 'student3.png' %}" alt="Student 3">
+            <p>Congratulations, Cameron Paton, on passing your test this morning in St. Albans on your first attempt with only 2 driver faults. Well done, Cameron! You made me proud. I wish you all the best for the future. Thank you very much for choosing Abu as your driving instructor. I wish you all the success in life. Stay safe on the road!</p>
+        </div>
+    </div>
+</section>
+
+
+        <section id="contact" class="section">
+            <h2  class="main-header">Contact Us</h2>
+                <div class="contact-card">
+                    <div class="contact-info-tile">
+                        <h3>Phone</h3>
+                            <p>Call us on: <br><span class="contact-detail">07534 639826</span></p>
+                    </div>
+                    <div class="contact-info-tile">
+                        <h3>Facebook</h3>
+                        <p>Add us on Facebook: <br>
+                            <a href="https://www.facebook.com/Abusdrivingschool/">
+                                <span class="contact-detail">@Abu's Driving School</span>
+                            </a>
+                        </p>
+                    </div>
+                    <div class="contact-info-tile">
+                        <h3>Instagram</h3>
+                        <p>Follow us on Instagram: 
+                            <a href="https://www.instagram.com/abusdrivingschool/?igsh=MXM0emthbzhjbWhuOA%3D%3D" 
+                            target="_blank">
+                                <span class="contact-detail">@abusdrivingschool</span>
+                            </a>
+                        </p>
+                    </div>
+                </div>
+        </section>
+    </main>
+     <footer>
+        <p>Developed by: <a href="https://www.linkedin.com/in/rahin-ashraf-130945224" target="_blank" style="color: #FFFFFF; 
+            text-decoration: underline; font-weight: bold;">@Rahin Ashraf</a></p>
+    </footer>
+</body>
+
+<script>
+function smoothScroll(target) {
+  const element = document.querySelector(target);
+  if (element) {
+    element.scrollIntoView({
+      behavior: 'smooth'
+    });
+  }
+}
+
+</script>
+</html>

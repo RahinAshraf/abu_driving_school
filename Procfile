@@ -1,0 +1,1 @@
+web gunicorn abu_driving_school.wsgi:application --log-file -

@@ -1,0 +1,115 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Welcome to Abu Driving School. We provide expert driving lessons for beginners and advanced learners in Hertfordshire and St Albans.">
+    <meta name="keywords" content="driving school, driving lessons, safe driving, Abu Driving School, St Albans, Hertfordshire">
+    <meta name="author" content="Abu Driving School">
+    <meta name="robots" content="index, follow">
+    <title>Reviews</title>
+
+    <!-- Larger Favicon for Google Search Results -->
+    <link rel="icon" type="image/png" href="{% static 'favicon-192x192.png' %}" sizes="192x192">
+    <link rel="apple-touch-icon" href="{% static 'favicon-180x180.png' %}">
+
+    
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #555;
+        }
+
+        .review {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .review:last-child {
+            border-bottom: none;
+        }
+
+        .review h3 {
+            margin: 0 0 10px;
+            font-size: 1.2em;
+            color: #333;
+        }
+
+        .review p {
+            margin: 5px 0;
+            font-size: 1em;
+            color: #666;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #fa7416;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #e69500;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Reviews</h1>
+
+        {% if reviews %}
+            {% for review in reviews %}
+                <div class="review">
+                    <h3>{{ review.user }} ({{ review.rating }} stars)</h3>
+                    <p>{{ review.comment }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No reviews yet. Be the first to leave a review!</p>
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+            <input type="text" name="user" placeholder="Your Name" required>
+            <input type="number" name="rating" min="1" max="5" placeholder="Rating (1-5)" required>
+            <textarea name="comment" placeholder="Your Review" required></textarea>
+            <button type="submit">Submit Review</button>
+        </form>
+    </div>
+</body>
+</html>
