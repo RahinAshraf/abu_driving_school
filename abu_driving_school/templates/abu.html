@@ -650,24 +650,29 @@ li {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background-color: #25D366; /* WhatsApp green, but you can change it */
-    color: white;
-    font-size: 24px;
-    padding: 15px;
+    background-color: transparent; /* Remove background */
+    padding: 0;
     border-radius: 50%;
     text-decoration: none;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: background 0.3s ease, transform 0.2s ease;
+    transition: transform 0.2s ease;
     display: flex;
     align-items: center;
     justify-content: center;
     width: 60px;
     height: 60px;
+    overflow: hidden; /* Ensures the image stays circular */
 }
 
 .sms-button:hover {
-    background-color: #1EBE5D; /* Slightly darker green */
     transform: scale(1.1);
+}
+
+.sms-icon {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image fills the button */
+    border-radius: 50%; /* Keeps it circular */
 }
     </style>
 
@@ -882,7 +887,7 @@ li {
     </a> {% endcomment %}
 
     <a href="sms:+447539429072" class="sms-button">
-        💬
+        <img src="{% static 'sms.png' %}" alt="SMS" class="sms-icon">
     </a>
 
 
