@@ -117,9 +117,9 @@
 
         <h1>Reviews</h1>
 
-        <!-- Display the total number of reviews -->
-        <p><strong>Total number of reviews:</strong> {{ total_reviews }}</p>
-        
+        <!-- Display the total number of reviews aligned to the right -->
+        <p style="text-align: right;"><strong>Total number of reviews:</strong> <span style="font-weight: bold;">{{ total_reviews }}</span></p>
+
         {% for review in reviews %}
             <div class="review-container">
 
