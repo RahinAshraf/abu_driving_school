@@ -42,8 +42,9 @@ def reviews_view(request):
 
     # Combine QuerySet and static reviews
     combined_reviews = list(queryset_reviews) + static_reviews
+    total_reviews = len(combined_reviews)
 
-    return render(request, 'reviews.html', {'reviews': combined_reviews})
+    return render(request, 'reviews.html', {'reviews': combined_reviews, 'total_reviews': total_reviews})
 
 
 def signup_view(request):
