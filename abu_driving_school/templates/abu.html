@@ -645,6 +645,30 @@ li {
             cursor: pointer;
             text-decoration: none;
         }
+
+        .sms-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #25D366; /* WhatsApp green, but you can change it */
+    color: white;
+    font-size: 24px;
+    padding: 15px;
+    border-radius: 50%;
+    text-decoration: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background 0.3s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+}
+
+.sms-button:hover {
+    background-color: #1EBE5D; /* Slightly darker green */
+    transform: scale(1.1);
+}
     </style>
 
     <script>
