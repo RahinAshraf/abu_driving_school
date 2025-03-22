@@ -796,7 +796,7 @@ p {
         <!-- Our Location Section -->
         <h3 class="sub-header">Our Location</h3>
         <p>
-            We are based in Hatfield &amp; Welwyn Garden City, two beautiful towns in Hertfordshire. 
+            We are based in Hatfield, Welwyn Garden City, &amp; St Albans. Three beautiful towns in Hertfordshire. 
             Check out our locations on the map below!
         </p>
         <!-- Interactive Map Section -->
@@ -815,7 +815,7 @@ p {
         const map = new mapboxgl.Map({
             container: 'map', // ID of the div
             style: 'mapbox://styles/mapbox/streets-v11', // Map style
-            center: [-0.2158, 51.7836], // St Albans coordinates
+            center: [-0.2582, 51.7733], // St Albans coordinates
             zoom: 11, // Zoom level
             attributionControl: false // Disable attribution
         });
@@ -832,8 +832,11 @@ p {
         }
 
         // Add markers for St Albans and Hatfield
+        // Add markers for St Albans, Hatfield, and Welwyn Garden City
         addMarker([-0.2231, 51.7634], "We are based in Hatfield");
         addMarker([-0.20855686113062374, 51.803775472981485], "We are based in Welwyn Garden City");
+        addMarker([-0.3428, 51.7527], "We are based in St Albans");
+
     });
 </script>
 
