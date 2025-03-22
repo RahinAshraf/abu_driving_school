@@ -146,6 +146,8 @@ from .models import Review
 
 # Define the path to your reviews.json file (root level)
 REVIEWS_FILE = os.path.join(settings.BASE_DIR, 'reviews.json')
+print(f"Path to reviews.json: {REVIEWS_FILE}")
+
 
 @login_required
 def submit_review(request):
@@ -163,6 +165,8 @@ def submit_review(request):
                 "rating": review.rating,
                 "comment": review.comment
             }
+            print("Review Submitted:", new_review)
+
 
             # Load the existing reviews from reviews.json
             with open(REVIEWS_FILE, 'r+', encoding='utf-8') as file:
@@ -176,8 +180,6 @@ def submit_review(request):
                 json.dump(reviews, file, indent=4)
                 file.truncate()  # Remove any extra content that might be left after the overwrite
 
-            # Inform the user that the review was successfully submitted
-            messages.success(request, 'Your review has been submitted successfully!')
             return redirect('reviews')  # Redirect to the reviews page after submission
         else:
             messages.error(request, 'Please correct the errors below.')
