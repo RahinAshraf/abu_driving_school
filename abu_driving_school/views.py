@@ -144,7 +144,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import ReviewForm
 from .models import Review
 
-# Define the absolute path to the reviews.json file
+# Path to reviews.json in the project root
 REVIEWS_FILE = os.path.join(settings.BASE_DIR, 'reviews.json')
 
 @login_required
@@ -152,36 +152,40 @@ def submit_review(request):
     if request.method == 'POST':
         form = ReviewForm(request.POST)
         if form.is_valid():
-            # Save review to the database
+            # Save the review to the database
             review = form.save(commit=False)
             review.user = request.user
             review.save()
 
-            # Create JSON object for the new review
+            # Create a JSON object for the new review
             new_review = {
                 "user": review.user.get_full_name() or review.user.username,
                 "rating": review.rating,
                 "comment": review.comment
             }
 
-            # Load existing reviews from JSON file
-            reviews = []
-            if os.path.exists(REVIEWS_FILE):
-                try:
-                    with open(REVIEWS_FILE, 'r', encoding='utf-8') as file:
+            # Ensure reviews.json exists
+            if not os.path.exists(REVIEWS_FILE):
+                with open(REVIEWS_FILE, 'w', encoding='utf-8') as file:
+                    json.dump([], file)  # Create an empty list if the file doesn't exist
+
+            # Append the new review to the JSON file without overwriting
+            try:
+                with open(REVIEWS_FILE, 'r+', encoding='utf-8') as file:
+                    try:
                         reviews = json.load(file)
                         if not isinstance(reviews, list):
                             reviews = []
-                except (json.JSONDecodeError, IOError):
-                    reviews = []
+                    except json.JSONDecodeError:
+                        reviews = []
 
-            # Insert the new review at the front
-            reviews.insert(0, new_review)
+                    # Insert the new review at the front
+                    reviews.insert(0, new_review)
 
-            # Save the updated list back to reviews.json
-            try:
-                with open(REVIEWS_FILE, 'w', encoding='utf-8') as file:
+                    # Move the file cursor to the beginning and rewrite with updated content
+                    file.seek(0)
                     json.dump(reviews, file, indent=4)
+                    file.truncate()  # Remove any remaining old data
             except IOError:
                 messages.error(request, "Error saving your review. Please try again.")
 
@@ -193,7 +197,6 @@ def submit_review(request):
         form = ReviewForm()
 
     return render(request, 'leave_review.html', {'form': form})
-
 
 
 # Leave review view for rendering the form
