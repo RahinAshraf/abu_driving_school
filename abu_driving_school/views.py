@@ -144,7 +144,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import ReviewForm
 from .models import Review
 
-# Define the absolute path to reviews.json
+# Define the path to your reviews.json file (root level)
 REVIEWS_FILE = os.path.join(settings.BASE_DIR, 'reviews.json')
 
 @login_required
@@ -157,44 +157,45 @@ def submit_review(request):
             review.user = request.user
             review.save()
 
-            # Create a JSON object for the new review
+            # Create a dictionary for the new review
             new_review = {
-                "user": review.user.get_full_name() or review.user.username,
+                "user": review.user.get_full_name() or review.user.username,  # Use full name or username
                 "rating": review.rating,
                 "comment": review.comment
             }
 
             try:
-                # Load existing reviews from reviews.json
+                # Load the existing reviews from reviews.json
                 with open(REVIEWS_FILE, 'r+', encoding='utf-8') as file:
                     try:
                         reviews = json.load(file)
                         if not isinstance(reviews, list):
-                            reviews = []
+                            reviews = []  # Reset to an empty list if the content is not a valid list
                     except json.JSONDecodeError:
                         reviews = []  # Reset to an empty list if JSON is corrupted
 
-                    # Insert the new review at the front of the list
+                    # Add the new review to the front of the list
                     reviews.insert(0, new_review)
 
-                    # Move the cursor to the beginning and rewrite the updated list
-                    file.seek(0)
+                    # Write the updated list back to the file
+                    file.seek(0)  # Go to the beginning of the file to overwrite
                     json.dump(reviews, file, indent=4)
-                    file.truncate()  # Ensure no leftover data from the previous write
+                    file.truncate()  # Remove any extra content that might be left after the overwrite
 
             except IOError as e:
                 print(f"Error writing to reviews.json: {e}")
                 messages.error(request, "Error saving your review. Please try again.")
 
             messages.success(request, 'Your review has been submitted successfully!')
-            return redirect('reviews')
+            return redirect('reviews')  # Redirect to the reviews page after submission
         else:
             messages.error(request, 'Please correct the errors below.')
-    
+
     else:
         form = ReviewForm()
 
     return render(request, 'leave_review.html', {'form': form})
+
 
 
 
