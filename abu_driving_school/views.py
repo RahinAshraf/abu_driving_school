@@ -117,23 +117,83 @@ def reviews(request):
     all_reviews = Review.objects.all().order_by('-created_at')  # Sort reviews by created_at in descending order
     return render(request, 'reviews.html', {'reviews': all_reviews})
 
-# views.py
+# # views.py RAHIN
+# @login_required
+# def submit_review(request):
+#     if request.method == 'POST':
+#         form = ReviewForm(request.POST)
+#         if form.is_valid():
+#             review = form.save(commit=False)
+#             review.user = request.user
+#             review.save()
+#             messages.success(request, 'Your review has been submitted successfully!')
+#             return redirect('reviews')  # Redirect to reviews page after submission
+#         else:
+#             messages.error(request, 'Please correct the errors below.')
+#     else:
+#         form = ReviewForm()
+
+#     return render(request, 'leave_review.html', {'form': form})
+
+import json
+import os
+from django.conf import settings
+from django.contrib import messages
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from .forms import ReviewForm
+from .models import Review
+
+# Define the absolute path to the reviews.json file
+REVIEWS_FILE = os.path.join(settings.BASE_DIR, 'reviews.json')
+
 @login_required
 def submit_review(request):
     if request.method == 'POST':
         form = ReviewForm(request.POST)
         if form.is_valid():
+            # Save review to the database
             review = form.save(commit=False)
             review.user = request.user
             review.save()
+
+            # Create JSON object for the new review
+            new_review = {
+                "user": review.user.get_full_name() or review.user.username,
+                "rating": review.rating,
+                "comment": review.comment
+            }
+
+            # Load existing reviews from JSON file
+            reviews = []
+            if os.path.exists(REVIEWS_FILE):
+                try:
+                    with open(REVIEWS_FILE, 'r', encoding='utf-8') as file:
+                        reviews = json.load(file)
+                        if not isinstance(reviews, list):
+                            reviews = []
+                except (json.JSONDecodeError, IOError):
+                    reviews = []
+
+            # Insert the new review at the front
+            reviews.insert(0, new_review)
+
+            # Save the updated list back to reviews.json
+            try:
+                with open(REVIEWS_FILE, 'w', encoding='utf-8') as file:
+                    json.dump(reviews, file, indent=4)
+            except IOError:
+                messages.error(request, "Error saving your review. Please try again.")
+
             messages.success(request, 'Your review has been submitted successfully!')
-            return redirect('reviews')  # Redirect to reviews page after submission
+            return redirect('reviews')  # Redirect to reviews page
         else:
             messages.error(request, 'Please correct the errors below.')
     else:
         form = ReviewForm()
 
     return render(request, 'leave_review.html', {'form': form})
+
 
 
 # Leave review view for rendering the form
