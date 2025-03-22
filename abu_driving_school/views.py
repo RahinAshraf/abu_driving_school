@@ -168,17 +168,18 @@ def submit_review(request):
                 # Open the reviews.json file for reading and writing
                 with open(REVIEWS_FILE, 'r+', encoding='utf-8') as file:
                     try:
-                        # Load the existing reviews
+                        # Load the existing reviews (as a list of dictionaries)
                         reviews = json.load(file)
                     except json.JSONDecodeError:
                         # If the file is empty or corrupted, initialize an empty list
                         reviews = []
 
-                    # Insert the new review at the front of the list
+                    # Insert the new review as a dictionary at the front of the list
                     reviews.insert(0, new_review)
 
                     # Go back to the beginning of the file and overwrite it with the updated reviews list
                     file.seek(0)
+                    # Write the updated reviews list back to the file
                     json.dump(reviews, file, indent=4)
                     file.truncate()  # Remove any extra content after the new data
 
@@ -202,6 +203,7 @@ def submit_review(request):
         form = ReviewForm()
 
     return render(request, 'leave_review.html', {'form': form})
+
 
 
 
