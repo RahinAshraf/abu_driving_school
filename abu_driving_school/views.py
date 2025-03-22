@@ -164,46 +164,27 @@ def submit_review(request):
                 "comment": review.comment
             }
 
-            try:
-                # Load the existing reviews from reviews.json
-                with open(REVIEWS_FILE, 'r+', encoding='utf-8') as file:
-                    try:
-                        reviews = json.load(file)
-                        if not isinstance(reviews, list):
-                            reviews = []  # Reset to an empty list if the content is not a valid list
-                    except json.JSONDecodeError:
-                        reviews = []  # Reset to an empty list if JSON is corrupted
+            # Load the existing reviews from reviews.json
+            with open(REVIEWS_FILE, 'r+', encoding='utf-8') as file:
+                reviews = json.load(file)
 
-                    # Print current reviews for debugging
-                    print("Current reviews from JSON:", reviews)
+                # Add the new review to the front of the list
+                reviews.insert(0, new_review)
 
-                    # Add the new review to the front of the list
-                    reviews.insert(0, new_review)
-
-                    # Print updated reviews for debugging
-                    print("Updated reviews to be saved:", reviews)
-
-                    # Write the updated list back to the file
-                    file.seek(0)  # Go to the beginning of the file to overwrite
-                    json.dump(reviews, file, indent=4)
-                    file.truncate()  # Remove any extra content that might be left after the overwrite
-
-            except IOError as e:
-                print(f"Error writing to reviews.json: {e}")
-                messages.error(request, "Error saving your review. Please try again.")
-                return redirect('reviews')  # Redirect even if there's an error
+                # Write the updated list back to the file
+                file.seek(0)  # Go to the beginning of the file to overwrite
+                json.dump(reviews, file, indent=4)
+                file.truncate()  # Remove any extra content that might be left after the overwrite
 
             # Inform the user that the review was successfully submitted
             messages.success(request, 'Your review has been submitted successfully!')
             return redirect('reviews')  # Redirect to the reviews page after submission
         else:
             messages.error(request, 'Please correct the errors below.')
-
     else:
         form = ReviewForm()
 
     return render(request, 'leave_review.html', {'form': form})
-
 
 
 
