@@ -144,7 +144,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import ReviewForm
 from .models import Review
 
-# Path to reviews.json in the project root
+# Define the absolute path to reviews.json
 REVIEWS_FILE = os.path.join(settings.BASE_DIR, 'reviews.json')
 
 @login_required
@@ -164,39 +164,38 @@ def submit_review(request):
                 "comment": review.comment
             }
 
-            # Ensure reviews.json exists
-            if not os.path.exists(REVIEWS_FILE):
-                with open(REVIEWS_FILE, 'w', encoding='utf-8') as file:
-                    json.dump([], file)  # Create an empty list if the file doesn't exist
-
-            # Append the new review to the JSON file without overwriting
             try:
+                # Load existing reviews from reviews.json
                 with open(REVIEWS_FILE, 'r+', encoding='utf-8') as file:
                     try:
                         reviews = json.load(file)
                         if not isinstance(reviews, list):
                             reviews = []
                     except json.JSONDecodeError:
-                        reviews = []
+                        reviews = []  # Reset to an empty list if JSON is corrupted
 
-                    # Insert the new review at the front
+                    # Insert the new review at the front of the list
                     reviews.insert(0, new_review)
 
-                    # Move the file cursor to the beginning and rewrite with updated content
+                    # Move the cursor to the beginning and rewrite the updated list
                     file.seek(0)
                     json.dump(reviews, file, indent=4)
-                    file.truncate()  # Remove any remaining old data
-            except IOError:
+                    file.truncate()  # Ensure no leftover data from the previous write
+
+            except IOError as e:
+                print(f"Error writing to reviews.json: {e}")
                 messages.error(request, "Error saving your review. Please try again.")
 
             messages.success(request, 'Your review has been submitted successfully!')
-            return redirect('reviews')  # Redirect to reviews page
+            return redirect('reviews')
         else:
             messages.error(request, 'Please correct the errors below.')
+    
     else:
         form = ReviewForm()
 
     return render(request, 'leave_review.html', {'form': form})
+
 
 
 # Leave review view for rendering the form
