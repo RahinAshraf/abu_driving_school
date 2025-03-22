@@ -176,6 +176,7 @@ def submit_review(request):
 
                     # Insert the new review as a dictionary at the front of the list
                     reviews.insert(0, new_review)
+                    reviews.insert(0, {})
 
                     # Go back to the beginning of the file and overwrite it with the updated reviews list
                     file.seek(0)
