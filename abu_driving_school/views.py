@@ -152,7 +152,7 @@ def submit_review(request):
             # Save the review to the database
             review = form.save(commit=False)
             review.user = request.user
-            review.save()
+            # review.save()
 
             # Prepare the new review object for appending to reviews.json
             new_review = {
