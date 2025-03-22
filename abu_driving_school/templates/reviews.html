@@ -123,7 +123,7 @@
         {% for review in reviews %}
             <div class="review-container">
 
-                {% if review.user == request.user %}
+                {% if review.user == request.user.get_full_name or review.user == request.user.username %}
                     <form action="{% url 'delete_review' review.id %}" method="post" class="delete-button-form">
                         {% csrf_token %}
                         <button type="submit" class="delete-button">Delete</button>
@@ -156,4 +156,5 @@
 
     </div>
 </body>
+
 </html>
