@@ -159,7 +159,7 @@ def submit_review(request):
 
             # Create a JSON object for the new review
             new_review = {
-                "user": review.user.get_full_name() or review.user,
+                "user": review.user.get_full_name() or review.user.username,
                 "rating": review.rating,
                 "comment": review.comment
             }
