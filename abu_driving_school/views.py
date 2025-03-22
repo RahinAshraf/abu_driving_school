@@ -174,8 +174,14 @@ def submit_review(request):
                     except json.JSONDecodeError:
                         reviews = []  # Reset to an empty list if JSON is corrupted
 
+                    # Print current reviews for debugging
+                    print("Current reviews from JSON:", reviews)
+
                     # Add the new review to the front of the list
                     reviews.insert(0, new_review)
+
+                    # Print updated reviews for debugging
+                    print("Updated reviews to be saved:", reviews)
 
                     # Write the updated list back to the file
                     file.seek(0)  # Go to the beginning of the file to overwrite
@@ -185,7 +191,9 @@ def submit_review(request):
             except IOError as e:
                 print(f"Error writing to reviews.json: {e}")
                 messages.error(request, "Error saving your review. Please try again.")
+                return redirect('reviews')  # Redirect even if there's an error
 
+            # Inform the user that the review was successfully submitted
             messages.success(request, 'Your review has been submitted successfully!')
             return redirect('reviews')  # Redirect to the reviews page after submission
         else:
@@ -195,6 +203,7 @@ def submit_review(request):
         form = ReviewForm()
 
     return render(request, 'leave_review.html', {'form': form})
+
 
 
 
