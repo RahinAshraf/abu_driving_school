@@ -152,7 +152,7 @@ def submit_review(request):
             # Save the review to the database
             review = form.save(commit=False)
             review.user = request.user
-            # review.save()
+            review.save()
 
             # Prepare the new review object for appending to reviews.json
             new_review = {
@@ -165,26 +165,28 @@ def submit_review(request):
             REVIEWS_FILE = os.path.join(settings.BASE_DIR, 'reviews.json')
 
             try:
-                # Open the reviews.json file for reading and writing
-                with open(REVIEWS_FILE, 'r+', encoding='utf-8') as file:
-                    try:
-                        # Load the existing reviews (as a list of dictionaries)
-                        reviews = json.load(file)
-                    except json.JSONDecodeError:
-                        # If the file is empty or corrupted, initialize an empty list
-                        reviews = []
+                # Read the existing reviews (if any) from the reviews.json file
+                if os.path.exists(REVIEWS_FILE):
+                    with open(REVIEWS_FILE, 'r', encoding='utf-8') as file:
+                        try:
+                            # Load the existing reviews (as a list of dictionaries)
+                            reviews = json.load(file)
+                        except json.JSONDecodeError:
+                            # If the file is empty or corrupted, initialize an empty list
+                            reviews = []
+                else:
+                    # If reviews.json doesn't exist, initialize an empty list
+                    reviews = []
 
-                    # Insert the new review as a dictionary at the front of the list
-                    reviews.insert(0, new_review)
+                # Insert the new review at the front of the list
+                reviews.insert(0, new_review)
 
-                    # Go back to the beginning of the file and overwrite it with the updated reviews list
-                    file.seek(0)
-                    # Write the updated reviews list back to the file
+                # Now, overwrite the entire reviews.json file with the updated reviews list
+                with open(REVIEWS_FILE, 'w', encoding='utf-8') as file:
                     json.dump(reviews, file, indent=4)
-                    file.truncate()  # Remove any extra content after the new data
 
-                    # Debugging output to confirm the review is saved correctly
-                    print("Updated reviews list:", reviews)
+                # Debugging output to confirm the review is saved correctly
+                print("Updated reviews list:", reviews)
 
             except IOError as e:
                 # Handle any I/O errors (e.g., file permission issues)
@@ -203,6 +205,7 @@ def submit_review(request):
         form = ReviewForm()
 
     return render(request, 'leave_review.html', {'form': form})
+
 
 
 
