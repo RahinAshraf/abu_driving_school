@@ -160,8 +160,6 @@ def submit_review(request):
                 "rating": review.rating,
                 "comment": review.comment
             }
-            new_review = json.dumps(new_review)
-
 
             # Define the path to the reviews.json file
             REVIEWS_FILE = os.path.join(settings.BASE_DIR, 'reviews.json')
