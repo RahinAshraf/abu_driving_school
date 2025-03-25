@@ -14,8 +14,7 @@ from django.http import HttpResponseForbidden
 from itertools import chain
 import json
 import os
-from django.shortcuts import render
-from .models import Review
+from django.conf import settings
 
 
 # View to render abu.html
@@ -34,13 +33,8 @@ def load_reviews_from_json():
         return []
 
 def reviews_view(request):
-    # Load static reviews from the JSON file
     static_reviews = load_reviews_from_json()
-
-    # Query dynamic reviews from the database
     queryset_reviews = Review.objects.all().order_by('-created_at')
-
-    # Combine QuerySet and static reviews
     combined_reviews = list(queryset_reviews) + static_reviews
     total_reviews = len(combined_reviews)
 
@@ -56,10 +50,7 @@ def signup_view(request):
         if User.objects.filter(username=username).exists():
             messages.error(request, "Username already exists.")
         else:
-            # Create the new user
             user = User.objects.create_user(username=username, email=email, password=password)
-            
-            # Authenticate and log the user in
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
@@ -67,7 +58,6 @@ def signup_view(request):
                 return redirect('abu')  # Redirect to the desired page after signup and login
 
     return render(request, 'signup.html')
-
 
 
 def login_view(request):
@@ -79,12 +69,10 @@ def login_view(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('abu')  # Redirect to the 'abu' view after login
+                return redirect('abu')  
             else:
-                # If user authentication fails (wrong username or password)
                 messages.error(request, "Invalid username or password.")
         else:
-            # If form is not valid (for other reasons)
             messages.error(request, "Invalid username or password.")
     else:
         form = AuthenticationForm()
@@ -96,7 +84,6 @@ def login_view(request):
     return render(request, 'registration/login.html', {'form': form})
 
 
-# Custom login view
 def custom_login_view(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -117,39 +104,12 @@ def reviews(request):
     all_reviews = Review.objects.all().order_by('-created_at')  # Sort reviews by created_at in descending order
     return render(request, 'reviews.html', {'reviews': all_reviews})
 
-# # views.py RAHIN
-# @login_required
-# def submit_review(request):
-#     if request.method == 'POST':
-#         form = ReviewForm(request.POST)
-#         if form.is_valid():
-#             review = form.save(commit=False)
-#             review.user = request.user
-#             review.save()
-#             messages.success(request, 'Your review has been submitted successfully!')
-#             return redirect('reviews')  # Redirect to reviews page after submission
-#         else:
-#             messages.error(request, 'Please correct the errors below.')
-#     else:
-#         form = ReviewForm()
-
-#     return render(request, 'leave_review.html', {'form': form})
-
-import json
-import os
-from django.conf import settings
-from django.contrib import messages
-from django.shortcuts import render, redirect
-from .forms import ReviewForm
-from .models import Review
-from django.contrib.auth.decorators import login_required
 
 @login_required
 def submit_review(request):
     if request.method == 'POST':
         form = ReviewForm(request.POST)
         if form.is_valid():
-            # Save the review to the database
             review = form.save(commit=False)
             review.user = request.user
             # review.save()
@@ -161,55 +121,36 @@ def submit_review(request):
                 "comment": review.comment
             }
 
-            # Define the path to the reviews.json file
             REVIEWS_FILE = os.path.join(settings.BASE_DIR, 'reviews.json')
 
             try:
-                # Read the existing reviews (if any) from the reviews.json file
                 if os.path.exists(REVIEWS_FILE):
                     with open(REVIEWS_FILE, 'r', encoding='utf-8') as file:
                         try:
-                            # Load the existing reviews (as a list of dictionaries)
                             reviews = json.load(file)
                         except json.JSONDecodeError:
-                            # If the file is empty or corrupted, initialize an empty list
                             reviews = []
                 else:
-                    # If reviews.json doesn't exist, initialize an empty list
                     reviews = []
 
-                # Insert the new review at the front of the list
                 reviews.insert(0, new_review)
-
-                # Now, overwrite the entire reviews.json file with the updated reviews list
+                
                 with open(REVIEWS_FILE, 'w', encoding='utf-8') as file:
                     json.dump(reviews, file, indent=4)
 
-                # Debugging output to confirm the review is saved correctly
-                print("Updated reviews list:", reviews)
-
             except IOError as e:
-                # Handle any I/O errors (e.g., file permission issues)
-                print(f"Error opening or writing to reviews.json: {e}")
                 messages.error(request, "There was an error saving your review. Please try again later.")
                 return redirect('reviews')
 
-            # Show success message
             messages.success(request, 'Your review has been submitted successfully!')
-            return redirect('reviews')  # Redirect to the reviews page after submission
-
+            return redirect('reviews')  
+        
         else:
-            # Form validation error
             messages.error(request, 'Please correct the errors below.')
     else:
         form = ReviewForm()
 
     return render(request, 'leave_review.html', {'form': form})
-
-
-
-
-
 
 
 # Leave review view for rendering the form
@@ -235,7 +176,6 @@ def delete_review(request, review_id):
         return HttpResponseForbidden("You are not allowed to delete this review.")
 
     return redirect('reviews')  # Redirect to reviews page after deletion
-
 
 
 # Review list view using class-based view
