@@ -13,8 +13,8 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 # Login settings
-LOGIN_URL = '/login/'  # Adjust this path based on your login URL
-LOGIN_REDIRECT_URL = 'abu'  # Ensure 'abu' is the name of the URL pattern for abu.html
+LOGIN_URL = '/login/' 
+LOGIN_REDIRECT_URL = 'main' 
 
 # Installed apps
 INSTALLED_APPS = [

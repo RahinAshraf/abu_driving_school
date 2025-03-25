@@ -24,7 +24,7 @@ urlpatterns = [
     path('', abu_view, name='main'),  # Homepage view
     path('signup/', signup_view, name='signup'),  # Signup view
     path('login/', custom_login_view, name='login'),  # Custom login view
-    path('logout/', auth_views.LogoutView.as_view(next_page='abu'), name='logout'),  # Logout view
+    path('logout/', auth_views.LogoutView.as_view(next_page='main'), name='logout'),  # Logout view
     path('reviews/', reviews_view, name='reviews'),  # Reviews view
     path('reviews/submit/', leave_review, name='leave_review'),  # Leave a review
     path('submit_review/', submit_review, name='submit_review'),  # Submit review
