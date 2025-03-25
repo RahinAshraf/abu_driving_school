@@ -21,7 +21,7 @@ from .views import abu_view, signup_view, reviews, leave_review, submit_review, 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', abu_view, name='abu'),  # Homepage view
+    path('', abu_view, name='main'),  # Homepage view
     path('signup/', signup_view, name='signup'),  # Signup view
     path('login/', custom_login_view, name='login'),  # Custom login view
     path('logout/', auth_views.LogoutView.as_view(next_page='abu'), name='logout'),  # Logout view
