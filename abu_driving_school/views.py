@@ -17,9 +17,8 @@ import os
 from django.conf import settings
 
 
-# View to render abu.html
 def abu_view(request):
-    return render(request, "abu.html")
+    return render(request, "main.html")
 
 
 def load_reviews_from_json():
@@ -55,7 +54,7 @@ def signup_view(request):
             if user is not None:
                 login(request, user)
                 messages.success(request, "You have signed up and logged in successfully!")
-                return redirect('abu')  # Redirect to the desired page after signup and login
+                return redirect('main')  # Redirect to the desired page after signup and login
 
     return render(request, 'signup.html')
 
@@ -69,7 +68,7 @@ def login_view(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('abu')  
+                return redirect('main')  
             else:
                 messages.error(request, "Invalid username or password.")
         else:
@@ -92,7 +91,7 @@ def custom_login_view(request):
 
         if user is not None:
             login(request, user)
-            return redirect('abu')
+            return redirect('main')
         else:
             messages.error(request, "Invalid username or password.")
 
