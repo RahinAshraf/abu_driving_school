@@ -135,23 +135,8 @@
             }
         }
 
-        .carousel-container {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            position: relative;
-            overflow: hidden;
-        }
 
-        /* Carousel list */
-        .carousel {
-            display: flex;
-            transition: transform 0.5s ease-in-out;
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            overflow: hidden; /* Prevent extra items from showing */
-        }
+    
 
         /* Carousel cards */
         .card {
@@ -217,59 +202,6 @@
             right: -22px;
         }
 
-        .wrapper .carousel {
-            width: 70%; /* Set carousel width to 70% of its container */
-            margin-left: 15%; /* Add 15% margin to the left */
-            margin-right: 15%; /* Add 15% margin to the right */
-            display: grid;
-            grid-auto-flow: column;
-            grid-auto-columns: 100%;
-            gap: 0; /* Remove gap for smooth alignment */
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            scroll-behavior: smooth;
-            scrollbar-width: none; /* Hide scrollbar for cleaner look */
-        }
-
-        .carousel::-webkit-scrollbar {
-            display: none;
-        }
-
-        .carousel :where(.card, .img) {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .carousel.dragging {
-            scroll-snap-type: none;
-            scroll-behavior: auto;
-        }
-
-        .carousel.no-transition {
-            scroll-behavior: auto;
-        }
-
-        .carousel.dragging .card {
-            cursor: grab;
-            user-select: none;
-        }
-
-        .carousel .card {
-            position: relative; /* Ensure arrows are positioned within */
-            height: 340px;
-            list-style: none;
-            background: #fff;
-            border-radius: 8px;
-            display: flex;
-            cursor: pointer;
-            width: 100%;
-            padding-bottom: 15px;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-        }
-
         .card .img {
             background: green;
             width: 145px;
@@ -327,361 +259,261 @@
             margin-top: 20px;
         }
 
-
-
         /* Contact Section Styling */
-#contact {
-    padding: 60px 20px;
-    background-color: #eda758; /* Light silver background for contrast */
-    color: black; /* Text color */
-    text-align: center;
-    font-family: 'Arial', sans-serif;
-}
+        #contact {
+            padding: 60px 20px;
+            background-color: #eda758; /* Light silver background for contrast */
+            color: black; /* Text color */
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+        }
 
-#contact h2 {
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 30px;
-    color: black; /* Black for the main heading */
-}
+        #contact h2 {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 30px;
+            color: black; /* Black for the main heading */
+        }
 
-.contact-card {
-    display: flex;
-    flex-direction: column;
-    gap: 20px; /* Spacing between tiles */
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-.contact-info-tile {
-    background: #f0cda5; /* Grey for the tile background */
-    border: 2px solid silver; /* Subtle silver border */
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
-    text-align: left; /* Align content inside each tile */
-}
-
-.contact-info-tile h3 {
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin-bottom: 10px;
-    color: black; /* Black for tile headings */
-}
-
-.contact-info-tile p {
-    margin: 0 0 10px;
-    line-height: 1.6;
-    color: black; /* Ensure text is black for readability */
-    
-}
-
-.contact-info-tile a.contact-link {
-    color: black; /* Black for links */
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.contact-info-tile a {
-    color: black; /* Black text color */
-    text-decoration: underline; /* Add underline */
-    text-decoration-color: black; /* Ensure the underline is black */
-    font-weight: bold; /* Bold styling */
-}
-
-.contact-info-tile a:hover {
-    color: silver; /* Silver hover effect */
-    text-decoration: underline; /* Keep underline on hover */
-    text-decoration-color: silver; /* Underline turns silver on hover */
-}
-
-
-.contact-info-tile a.contact-link:hover {
-    color: silver; /* Silver hover effect */
-    text-decoration: underline; /* Subtle hover effect */
-}
-
-/* Responsive Layout */
-@media (min-width: 768px) {
-    .contact-card {
-        flex-direction: row; /* Align tiles horizontally */
-        justify-content: space-between;
-        flex: 0 1 30%;
-    }
-
-    .contact-info-tile {
-        flex: 1; /* Make each tile equal in width */
-        margin: 0 10px; /* Spacing between tiles */
-    }
-}
-
-
-.contact-detail {
-    color: black; /* Ensure text is black */
-    font-weight: bold; /* Make the text bold */
-}
-
-
-
-/* Style for carousel navigation arrows */
-.carousel-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-    z-index: 10;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    transition: background-color 0.3s;
-}
-
-.carousel-arrow:hover {
-    background-color: rgba(0, 0, 0, 0.8);
-}
-
-.left-arrow {
-    left: 15px;
-}
-
-.right-arrow {
-    right: 15px;
-}
-
-
-/* Collapsible Header */
-    .collapsible-header {
-        font-size: 2rem;
-        cursor: pointer;
-        background-color: #f2f2f2;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
-    /* Collapsible Content */
-    .collapsible-content {
-        display: none;
-        padding: 10px;
-        background-color: #fafafa;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        margin-top: 10px;
-    }
-
-    /* Sub-Headers */
-    .sub-header {
-        font-size: 1.5rem;
-        margin-top: 15px;
-    }
-
-
-.about-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f7dfc8;
-}
-
-    /* Interactive Map */
-    #map {
-        height: 400px;
-        width: 100%;
-    }
-
-
-    .home-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #fac28c;
-}
-
-.main-header {
-    font-size: 2em;
-    color: #333;
-    margin-bottom: 20px;
-    text-align: center; /* Center the text */
-}
-
-
-li {
-    margin-bottom: 10px; /* Increase the space between bullet points */
-}
-
-
-@media (min-width: 768px) {
-    li {
-        font-size: 1.25rem; /* Increase the font size for bullet points */
-    }
-    ul {
-        font-size: 1.2rem; /* Increase the font size of list items */
-    }
-    p {
-        font-size: 1.2rem; /* Increase the font size of all text inside p tags */
-    }
-}
-    .banner {
-        background-color: black;
-        color: white;
-        text-align: center;
-        position: fixed; /* Keeps the banner visible when scrolling */
-        top: 0;
-        z-index: 1000; /* Ensures it stays on top of other elements */
-        font-family: Arial, sans-serif;
-        width: 100vw; /* Makes the banner span the entire viewport width */
-        height: 60px; /* Define a fixed height for the banner */
-
-
-    }
-    .banner h2 {
-        margin: 0;
-        font-size: 20px;
-        letter-spacing: 2px;
-        line-height: 60px; /* Ensures text is vertically centered within the banner */
-
-    }
-
-/* General Section Styling */
-.section {
-    padding: 20px;
-}
-
-/* Container for student profiles */
-.students-container {
-    text-align: center;
-    display: flex;
-    gap: 20px;
-    padding: 20px;
-}
-
-/* Each student box */
-.student {
-    flex: 1;
-    text-align: center;
-    min-height: 400px; /* Ensures all boxes have the same height */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px;
-    background: #f8f8f8; /* Light background to make them stand out */
-    border-radius: 10px;
-    overflow: hidden; /* Prevents any content from overflowing */
-}
-
-/* Default Image Styling (Laptops & Large Screens) */
-.student img {
-    width: 100%;
-    max-height: 300px; /* Prevents overly large images */
-    object-fit: contain; /* Ensures full image is displayed */
-    border-radius: 10px;
-    display: block;
-    background-color: white; /* Adds a background in case images are transparent */
-}
-
-/* Mobile: Keep images' original aspect ratio and prevent height change */
-@media (max-width: 768px) {
-    .students-container {
-        flex-direction: column; /* Stack images on mobile */
-    }
-
-    .student {
-        width: 100%;
-    }
-
-    .student img {
-        width: 100%; /* Make the image fill the container width */
-        height: auto; /* Maintain the image's original height and aspect ratio */
-    }
-}
-
-
-.image-container {
-    display: flex;               /* Enable flexbox */
-    justify-content: center;     /* Center horizontally */
-    align-items: center;         /* Center vertically */
-    height: 100%;                 /* Ensure the container takes full height (optional, depending on your layout) */
-}
-
-/* Default image size for smaller screens (mobile/tablet) */
-.image-container img {
-    width: 100%;         /* Makes image responsive */
-    height: auto;        /* Maintain aspect ratio */
-}
-
-/* Make image much smaller on laptop screens */
-@media (min-width: 1024px) {  /* Targeting screens wider than 1024px, typically laptops */
-    .image-container img {
-        width: 30%;       /* Set width to 50% of the container */
-        height: auto%;     /* Maintain aspect ratio */
-    }
-}
-
-.whatsapp-button {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #25D366;
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
+        .contact-card {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 30px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-            cursor: pointer;
+            flex-direction: column;
+            gap: 20px; /* Spacing between tiles */
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .contact-info-tile {
+            background: #f0cda5; /* Grey for the tile background */
+            border: 2px solid silver; /* Subtle silver border */
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+            text-align: left; /* Align content inside each tile */
+        }
+
+        .contact-info-tile h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: black; /* Black for tile headings */
+        }
+
+        .contact-info-tile p {
+            margin: 0 0 10px;
+            line-height: 1.6;
+            color: black; /* Ensure text is black for readability */
+            
+        }
+
+        .contact-info-tile a.contact-link {
+            color: black; /* Black for links */
             text-decoration: none;
+            font-weight: bold;
+        }
+
+        .contact-info-tile a {
+            color: black; /* Black text color */
+            text-decoration: underline; /* Add underline */
+            text-decoration-color: black; /* Ensure the underline is black */
+            font-weight: bold; /* Bold styling */
+        }
+
+        .contact-info-tile a:hover {
+            color: silver; /* Silver hover effect */
+            text-decoration: underline; /* Keep underline on hover */
+            text-decoration-color: silver; /* Underline turns silver on hover */
+        }
+
+
+        .contact-info-tile a.contact-link:hover {
+            color: silver; /* Silver hover effect */
+            text-decoration: underline; /* Subtle hover effect */
+        }
+
+        /* Responsive Layout */
+        @media (min-width: 768px) {
+            .contact-card {
+                flex-direction: row; /* Align tiles horizontally */
+                justify-content: space-between;
+                flex: 0 1 30%;
+            }
+
+            .contact-info-tile {
+                flex: 1; /* Make each tile equal in width */
+                margin: 0 10px; /* Spacing between tiles */
+            }
+        }
+
+
+        .contact-detail {
+            color: black; /* Ensure text is black */
+            font-weight: bold; /* Make the text bold */
+        }
+
+        /* Sub-Headers */
+        .sub-header {
+            font-size: 1.5rem;
+            margin-top: 15px;
+        }
+
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f7dfc8;
+        }
+
+        /* Interactive Map */
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+
+
+        .home-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fac28c;
+        }
+
+        .main-header {
+            font-size: 2em;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center; /* Center the text */
+        }
+
+        li {
+            margin-bottom: 10px; /* Increase the space between bullet points */
+        }
+
+
+        @media (min-width: 768px) {
+            li {
+                font-size: 1.25rem; /* Increase the font size for bullet points */
+            }
+            ul {
+                font-size: 1.2rem; /* Increase the font size of list items */
+            }
+            p {
+                font-size: 1.2rem; /* Increase the font size of all text inside p tags */
+            }
+        }
+
+        /* General Section Styling */
+        .section {
+            padding: 20px;
+        }
+
+        /* Container for student profiles */
+        .students-container {
+            text-align: center;
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        /* Each student box */
+        .student {
+            flex: 1;
+            text-align: center;
+            min-height: 400px; /* Ensures all boxes have the same height */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            background: #f8f8f8; /* Light background to make them stand out */
+            border-radius: 10px;
+            overflow: hidden; /* Prevents any content from overflowing */
+        }
+
+        /* Default Image Styling (Laptops & Large Screens) */
+        .student img {
+            width: 100%;
+            max-height: 300px; /* Prevents overly large images */
+            object-fit: contain; /* Ensures full image is displayed */
+            border-radius: 10px;
+            display: block;
+            background-color: white; /* Adds a background in case images are transparent */
+        }
+
+        /* Mobile: Keep images' original aspect ratio and prevent height change */
+        @media (max-width: 768px) {
+            .students-container {
+                flex-direction: column; /* Stack images on mobile */
+            }
+
+            .student {
+                width: 100%;
+            }
+
+            .student img {
+                width: 100%; /* Make the image fill the container width */
+                height: auto; /* Maintain the image's original height and aspect ratio */
+            }
+        }
+
+        .image-container {
+            display: flex;               /* Enable flexbox */
+            justify-content: center;     /* Center horizontally */
+            align-items: center;         /* Center vertically */
+            height: 100%;                 /* Ensure the container takes full height (optional, depending on your layout) */
+        }
+
+        /* Default image size for smaller screens (mobile/tablet) */
+        .image-container img {
+            width: 100%;         /* Makes image responsive */
+            height: auto;        /* Maintain aspect ratio */
+        }
+
+        /* Make image much smaller on laptop screens */
+        @media (min-width: 1024px) {  /* Targeting screens wider than 1024px, typically laptops */
+            .image-container img {
+                width: 30%;       /* Set width to 50% of the container */
+                height: auto%;     /* Maintain aspect ratio */
+            }
         }
 
         .sms-button {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: transparent; /* Remove background */
-    padding: 0;
-    border-radius: 50%;
-    text-decoration: none;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 60px;
-    height: 60px;
-    overflow: hidden; /* Ensures the image stays circular */
-}
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: transparent; /* Remove background */
+            padding: 0;
+            border-radius: 50%;
+            text-decoration: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            overflow: hidden; /* Ensures the image stays circular */
+        }
 
-.sms-button:hover {
-    transform: scale(1.1);
-}
+        .sms-button:hover {
+            transform: scale(1.1);
+        }
 
-.sms-icon {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Ensures the image fills the button */
-    border-radius: 50%; /* Keeps it circular */
-}
+        .sms-icon {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensures the image fills the button */
+            border-radius: 50%; /* Keeps it circular */
+        }
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-p {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 400; /* Adjust weight as needed */
-    line-height: 1.6; /* Optional: Improve readability */
-}
+        p {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 400; /* Adjust weight as needed */
+            line-height: 1.6; /* Optional: Improve readability */
+        }
     </style>
 
     <script>
@@ -738,10 +570,10 @@ p {
 
         <!-- Content underneath the image -->
         <div class="content">
-<h1 style="color: #919090; font-family: 'Courier New', Courier, monospace; text-align: center;">
-    Master the road with  
-    <div style="color: orange;">Abu's Driving School Hertfordshire!</div>
-</h1>
+            <h1 style="color: #919090; font-family: 'Courier New', Courier, monospace; text-align: center;">
+                Master the road with  
+                <div style="color: orange;">Abu's Driving School Hertfordshire!</div>
+            </h1>
         </div>
     </div>
 
@@ -751,7 +583,6 @@ p {
             <div class="home-container">
                 <h2 class="main-header">Home</h2>
                 <p> Welcome to Abu's Driving School Hertfordshire, where Abu, your dedicated instructor, offers personalised driving lessons to help you master the road.</p>
-
                 <h3 class="sub-header">Why Learn with Us?</h3>
                     <ul>
                         <li>Abu is a <b>certified instructor</b> with extensive experience in teaching driving.</li>
