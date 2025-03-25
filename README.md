@@ -1,4 +1,4 @@
-# Abu's Driving School Hertfordshire - Website
+# Abu's Driving School Hertfordshire
 
 ## Overview
 This is the official website for **Abu's Driving School Hertfordshire**, a driving school offering expert driving lessons in Hatfield, St Albans, and Welwyn Garden City. The website provides information about available lessons, instructor details, student testimonials, and contact information.
