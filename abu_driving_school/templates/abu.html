@@ -39,14 +39,12 @@
 
 </head>
 <body>
-
     <div class="container">
         <div class="buttons-container">
             <button onclick="smoothScroll('#home')">Home</button>
             <button onclick="smoothScroll('#about')">About</button>
             <button onclick="smoothScroll('#OurStudents')">Our Pupils</button>
             <button onclick="smoothScroll('#contact')">Contact Us</button>
-
             <button onclick="location.href='{% url 'reviews' %}'">Reviews</button>
 
             {% if user.is_authenticated %}
@@ -57,20 +55,16 @@
                 <button onclick="location.href='{% url 'login' %}'">Login</button>
             {% endif %}
 
-            {% if user.email == "Abu@gmail.com" %} <!-- UPDATE THIS TO USE YOUR REAL PERSONAL EMAIL --> 
+            {% if user.email == "Abu@gmail.com" %}
                 <button onclick="location.href='https://github.com/RahinAshraf/ash_driving_school.git'">
                     Code Repository
                 </button>
             {% endif %}
         </div>
 
-        <!-- Logo image at top center -->
         <img src="{% static 'logo.png' %}" alt="Logo" class="logo">
-
-        <!-- Full-screen background image -->
         <img src="{% static 'background-image.png' %}" alt="Full Screen Image" class="full-screen-image">
-
-        <!-- Content underneath the image -->
+        
         <div class="content">
             <h1 style="color: #919090; font-family: 'Courier New', Courier, monospace; text-align: center;">
                 Master the road with  
@@ -80,7 +74,6 @@
     </div>
 
      <main id="content">
-
         <section id="home" class="section" style="background-color: #fac28c;">
             <div class="home-container">
                 <h2 class="main-header">Home</h2>
@@ -97,31 +90,23 @@
         </section>
         <section id="about" class="section" style="background-color: #f7dfc8;">
             <div class="about-container">
-                <!-- About Section Header -->
                 <h2 class="main-header">About</h2>
                 <p>
                     Abu's Driving School has proudly served Hertfordshire for several years. We are dedicated to supporting every pupil in reaching their driving objectives and passing their test with confidence.
                 </p>
-
-                <!-- Meet Abu Section -->
                 <h3 class="sub-header">Meet Abu</h3>
                 <p>
                     Abu is a certified and highly skilled driving instructor with a true passion for teaching. With a track record of helping hundreds of pupils pass their driving tests, Abu blends a deep knowledge of driving techniques with a warm, encouraging approach to teaching.
                 </p>
-
-                <!-- Our Vehicles Section -->
                 <h3 class="sub-header">Our Vehicles</h3>
                 <p>
                     We offer a selection of modern, maintained vehicles, all fitted with dual controls for your safety. Whether you prefer driving a manual or automatic, we have the perfect car to meet your preferences. 
                 </p>
                 <p>Check out below an image of the vehicle we are currently using to train our pupils.</p>
-
                 <div class="image-container">
                     <img src="{% static 'instructor-car.jpg' %}">
                 </div>
-
                 <br>
-                <!-- Our Location Section -->
                 <h3 class="sub-header">Our Location</h3>
                 <p>
                     We are based in Hatfield, Welwyn Garden City, &amp; St Albans. Three beautiful towns in Hertfordshire. 
@@ -163,10 +148,9 @@
                         addMarker([-0.3428, 51.7527], "We are based in St Albans");
 
                     });
-        </script>
-    </div>
+                </script>
+            </div>
         </section>
-
         <section id="OurStudents" class="section">
             <h2 class="main-header">Our Pupils</h2>
             <p style="text-align: center;"><b>Meet some of our pupils who passed their driving tests with us!</b></p>
@@ -185,7 +169,6 @@
                 </div>
             </div>
         </section>
-
         <section id="contact" class="section">
             <h2  class="main-header">Contact Us</h2>
                 <div class="contact-card">
@@ -217,13 +200,10 @@
         <p>Developed by: <a href="https://www.linkedin.com/in/rahin-ashraf-130945224" target="_blank" style="color: #FFFFFF; 
             text-decoration: underline; font-weight: bold;">@Rahin Ashraf</a></p>
     </footer>
-
     <a href="sms:+447534639826?&body=Hey Abu,%0A%0AMy name is [Insert Your Name]. I am looking to take driving lessons to pass my driving test, and I came across your website. Please give me a call when you’re free so we can discuss our availability. I look forward to mastering the road!" class="sms-button">
         <img src="{% static 'sms.png' %}" alt="SMS" class="sms-icon">
     </a>
-
 </body>
-
 <script>
     function smoothScroll(target) {
         const element = document.querySelector(target);
