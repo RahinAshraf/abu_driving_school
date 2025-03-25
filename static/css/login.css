@@ -1,0 +1,95 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    position: relative; /* Set container to relative so we can position the link inside it */
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.home-link {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: #fa7416; 
+    text-decoration: none;
+    font-weight: bold;
+}
+.home-link:hover {
+    text-decoration: underline;
+}
+
+h2 {
+    text-align: center;
+    color: #FF0000;
+    margin-top: 30px; /* Add space for the back-link */
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input[type="text"], input[type="password"] {
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px;
+    background-color: #fa7416; 
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 18px; /* Increased font size */
+    margin-top: 15px; /* Added gap between input fields and buttons */
+}
+
+button:hover {
+    background-color: #cc8400; 
+}
+
+p {
+    text-align: center;
+}
+
+.error {
+    color: #FF0000;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.register-btn {
+    padding: 10px;
+    background-color: #fa7416; 
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    text-align: center;
+    display: inline-block;
+    margin-top: 15px;
+    width: 95%;
+}
+
+.register-btn:hover {
+    background-color: #cc8400; 
+}
+
+
+h1 {
+    text-align: center; /* Center-align header */
+    color: black;
+    font-family: 'Courier New', Courier, monospace;
+    margin-top: 35px; /* Increased margin-top to create space below the link */
+}
