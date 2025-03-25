@@ -682,9 +682,6 @@ p {
     font-weight: 400; /* Adjust weight as needed */
     line-height: 1.6; /* Optional: Improve readability */
 }
-
-
-
     </style>
 
     <script>
@@ -710,8 +707,6 @@ p {
 <body>
 
     <div class="container">
-
-        <!-- Buttons at the bottom left -->
         <div class="buttons-container">
             <button onclick="smoothScroll('#home')">Home</button>
             <button onclick="smoothScroll('#about')">About</button>
@@ -736,10 +731,10 @@ p {
         </div>
 
         <!-- Logo image at top center -->
-        <img src="{% static 'newLogo.png' %}" alt="Logo" class="logo">
+        <img src="{% static 'logo.png' %}" alt="Logo" class="logo">
 
         <!-- Full-screen background image -->
-        <img src="{% static 'shush.png' %}" alt="Full Screen Image" class="full-screen-image">
+        <img src="{% static 'background-image.png' %}" alt="Full Screen Image" class="full-screen-image">
 
         <!-- Content underneath the image -->
         <div class="content">
@@ -753,115 +748,110 @@ p {
      <main id="content">
 
         <section id="home" class="section" style="background-color: #fac28c;">
-    <div class="home-container">
-        <h2 class="main-header">Home</h2>
-        <p> Welcome to Abu's Driving School Hertfordshire, where Abu, your dedicated instructor, offers personalised driving lessons to help you master the road.</p>
+            <div class="home-container">
+                <h2 class="main-header">Home</h2>
+                <p> Welcome to Abu's Driving School Hertfordshire, where Abu, your dedicated instructor, offers personalised driving lessons to help you master the road.</p>
 
-        <h3 class="sub-header">Why Learn with Us?</h3>
-            <ul>
-                <li>Abu is a <b>certified instructor</b> with extensive experience in teaching driving.</li>
-                <li>We offer the advanced driving course: <b>Pass Plus.</b></li>
-                <li>We offer <b>Block Booking</b> and also train our pupils on the <b>test routes</b> used by the examiners, so that our pupils are in a great position to pass their driving tests.</li>
-                <li>We offer both <b>Manual</b> and <b>Automatic</b> lessons.</li>
-            </ul>
-            <p>Whether you're just starting or aiming to improve your skills, Abu will guide you every step of the way to ensure you become a confident and capable driver.</p>
-    </div>
-</section>
+                <h3 class="sub-header">Why Learn with Us?</h3>
+                    <ul>
+                        <li>Abu is a <b>certified instructor</b> with extensive experience in teaching driving.</li>
+                        <li>We offer the advanced driving course: <b>Pass Plus.</b></li>
+                        <li>We offer <b>Block Booking</b> and also train our pupils on the <b>test routes</b> used by the examiners, so that our pupils are in a great position to pass their driving tests.</li>
+                        <li>We offer both <b>Manual</b> and <b>Automatic</b> lessons.</li>
+                    </ul>
+                    <p>Whether you're just starting or aiming to improve your skills, Abu will guide you every step of the way to ensure you become a confident and capable driver.</p>
+            </div>
+        </section>
         <section id="about" class="section" style="background-color: #f7dfc8;">
-    <div class="about-container">
-        <!-- About Section Header -->
-        <h2 class="main-header">About</h2>
-        <p>
-            Abu's Driving School has proudly served Hertfordshire for several years. We are dedicated to supporting every pupil in reaching their driving objectives and passing their test with confidence.
-        </p>
+            <div class="about-container">
+                <!-- About Section Header -->
+                <h2 class="main-header">About</h2>
+                <p>
+                    Abu's Driving School has proudly served Hertfordshire for several years. We are dedicated to supporting every pupil in reaching their driving objectives and passing their test with confidence.
+                </p>
 
-        <!-- Meet Abu Section -->
-        <h3 class="sub-header">Meet Abu</h3>
-        <p>
-            Abu is a certified and highly skilled driving instructor with a true passion for teaching. With a track record of helping hundreds of pupils pass their driving tests, Abu blends a deep knowledge of driving techniques with a warm, encouraging approach to teaching.
-        </p>
+                <!-- Meet Abu Section -->
+                <h3 class="sub-header">Meet Abu</h3>
+                <p>
+                    Abu is a certified and highly skilled driving instructor with a true passion for teaching. With a track record of helping hundreds of pupils pass their driving tests, Abu blends a deep knowledge of driving techniques with a warm, encouraging approach to teaching.
+                </p>
 
-        <!-- Our Vehicles Section -->
-        <h3 class="sub-header">Our Vehicles</h3>
-        <p>
-            We offer a selection of modern, maintained vehicles, all fitted with dual controls for your safety. Whether you prefer driving a manual or automatic, we have the perfect car to meet your preferences. 
-        </p>
-        <p>Check out below an image of the vehicle we are currently using to train our pupils.</p>
+                <!-- Our Vehicles Section -->
+                <h3 class="sub-header">Our Vehicles</h3>
+                <p>
+                    We offer a selection of modern, maintained vehicles, all fitted with dual controls for your safety. Whether you prefer driving a manual or automatic, we have the perfect car to meet your preferences. 
+                </p>
+                <p>Check out below an image of the vehicle we are currently using to train our pupils.</p>
 
-        <div class="image-container">
-            <img src="{% static 'carSame.jpg' %}">
-        </div>
+                <div class="image-container">
+                    <img src="{% static 'instructor-car.jpg' %}">
+                </div>
 
-        <br>
-        <!-- Our Location Section -->
-        <h3 class="sub-header">Our Location</h3>
-        <p>
-            We are based in Hatfield, Welwyn Garden City, &amp; St Albans. Three beautiful towns in Hertfordshire. 
-            Check out our locations on the map below!
-        </p>
-        <!-- Interactive Map Section -->
-<div id="map" style="height: 400px; width: 100%; margin-top: 20px;"></div>
+                <br>
+                <!-- Our Location Section -->
+                <h3 class="sub-header">Our Location</h3>
+                <p>
+                    We are based in Hatfield, Welwyn Garden City, &amp; St Albans. Three beautiful towns in Hertfordshire. 
+                    Check out our locations on the map below!
+                </p>
+                <!-- Interactive Map Section -->
+                <div id="map" style="height: 400px; width: 100%; margin-top: 20px;"></div>
 
-<!-- Mapbox CSS & JS -->
-<link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet">
-<script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+                <!-- Mapbox CSS & JS -->
+                <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet">
+                <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // Replace with your actual Mapbox access token
-        mapboxgl.accessToken = 'pk.eyJ1IjoicmFoaW4wMiIsImEiOiJjbThhOHMyZXcxZDN5MnhzYzcycGFkeTJwIn0.U3L_6EUIsD1VmuqjrAwBYg';
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        // Replace with your actual Mapbox access token
+                        mapboxgl.accessToken = 'pk.eyJ1IjoicmFoaW4wMiIsImEiOiJjbThhOHMyZXcxZDN5MnhzYzcycGFkeTJwIn0.U3L_6EUIsD1VmuqjrAwBYg';
 
-        // Initialize the Mapbox map
-        const map = new mapboxgl.Map({
-            container: 'map', // ID of the div
-            style: 'mapbox://styles/mapbox/streets-v11', // Map style
-            center: [-0.28070274058493555, 51.77573335660947], // St Albans coordinates 51.77024541756562, -0.2708746926326037
-            zoom: 10, // Zoom level 51.77573335660947, -0.28070274058493555
-            attributionControl: false // Disable attribution
-        });
+                        // Initialize the Mapbox map
+                        const map = new mapboxgl.Map({
+                            container: 'map', // ID of the div
+                            style: 'mapbox://styles/mapbox/streets-v11', // Map style
+                            center: [-0.28070274058493555, 51.77573335660947],
+                            zoom: 10, // Zoom level
+                            attributionControl: false // Disable attribution
+                        });
 
-        // Add navigation controls (zoom & rotation)
-        map.addControl(new mapboxgl.NavigationControl());
+                        // Add navigation controls (zoom & rotation)
+                        map.addControl(new mapboxgl.NavigationControl());
 
-        // Function to add markers
-        function addMarker(coords, popupText) {
-            new mapboxgl.Marker()
-                .setLngLat(coords)
-                .setPopup(new mapboxgl.Popup().setHTML(`<b>${popupText}</b>`))
-                .addTo(map);
-        }
+                        // Function to add markers
+                        function addMarker(coords, popupText) {
+                            new mapboxgl.Marker()
+                                .setLngLat(coords)
+                                .setPopup(new mapboxgl.Popup().setHTML(`<b>${popupText}</b>`))
+                                .addTo(map);
+                        }
+                        addMarker([-0.2231, 51.7634], "We are based in Hatfield");
+                        addMarker([-0.20855686113062374, 51.803775472981485], "We are based in Welwyn Garden City");
+                        addMarker([-0.3428, 51.7527], "We are based in St Albans");
 
-        // Add markers for St Albans and Hatfield
-        // Add markers for St Albans, Hatfield, and Welwyn Garden City
-        addMarker([-0.2231, 51.7634], "We are based in Hatfield");
-        addMarker([-0.20855686113062374, 51.803775472981485], "We are based in Welwyn Garden City");
-        addMarker([-0.3428, 51.7527], "We are based in St Albans");
-
-    });
-</script>
-
+                    });
+        </script>
     </div>
-</section>
+        </section>
 
-<section id="OurStudents" class="section">
-    <h2 class="main-header">Our Pupils</h2>
-    <p style="text-align: center;"><b>Meet some of our pupils who passed their driving tests with us!</b></p>
-    <div class="students-container">
-        <div class="student">
-            <img src="{% static 'student1.png' %}" alt="Student 1">
-            <p>Congratulations, Olawale Jaiyeola, on passing your test this morning in St. Albans! Well done, Olawale, great job, mate. I wish you all the best for the future, and thank you for choosing Abu as your driving instructor. Good luck for the future, and stay safe on the road at all times!</p>
-        </div>
-        <div class="student">
-            <img src="{% static 'student2.png' %}" alt="Student 2">
-            <p>Congratulations, Gihani Ramdani, on passing your test this afternoon in St. Albans on your first attempt with only 3 driver faults. Well done, Gihani! I'm very happy for you. Thank you for choosing Abu as your driving instructor. I wish you all the best for the future!</p>
-        </div>
-        <div class="student">
-            <img src="{% static 'student3.png' %}" alt="Student 3">
-            <p>Congratulations, Cameron Paton, on passing your test this morning in St. Albans on your first attempt with only 2 driver faults. Well done, Cameron! You made me proud. I wish you all the best for the future. Thank you very much for choosing Abu as your driving instructor. I wish you all the success in life. Stay safe on the road!</p>
-        </div>
-    </div>
-</section>
-
+        <section id="OurStudents" class="section">
+            <h2 class="main-header">Our Pupils</h2>
+            <p style="text-align: center;"><b>Meet some of our pupils who passed their driving tests with us!</b></p>
+            <div class="students-container">
+                <div class="student">
+                    <img src="{% static 'student1.png' %}" alt="Student 1">
+                    <p>Congratulations, Olawale Jaiyeola, on passing your test this morning in St. Albans! Well done, Olawale, great job, mate. I wish you all the best for the future, and thank you for choosing Abu as your driving instructor. Good luck for the future, and stay safe on the road at all times!</p>
+                </div>
+                <div class="student">
+                    <img src="{% static 'student2.png' %}" alt="Student 2">
+                    <p>Congratulations, Gihani Ramdani, on passing your test this afternoon in St. Albans on your first attempt with only 3 driver faults. Well done, Gihani! I'm very happy for you. Thank you for choosing Abu as your driving instructor. I wish you all the best for the future!</p>
+                </div>
+                <div class="student">
+                    <img src="{% static 'student3.png' %}" alt="Student 3">
+                    <p>Congratulations, Cameron Paton, on passing your test this morning in St. Albans on your first attempt with only 2 driver faults. Well done, Cameron! You made me proud. I wish you all the best for the future. Thank you very much for choosing Abu as your driving instructor. I wish you all the success in life. Stay safe on the road!</p>
+                </div>
+            </div>
+        </section>
 
         <section id="contact" class="section">
             <h2  class="main-header">Contact Us</h2>
@@ -895,26 +885,20 @@ p {
             text-decoration: underline; font-weight: bold;">@Rahin Ashraf</a></p>
     </footer>
 
-    {% comment %} <a href="https://wa.me/447539429072" class="whatsapp-button" target="_blank">
-        &#128222;
-    </a> {% endcomment %}
-
     <a href="sms:+447534639826?&body=Hey Abu,%0A%0AMy name is [Insert Your Name]. I am looking to take driving lessons to pass my driving test, and I came across your website. Please give me a call when you’re free so we can discuss our availability. I look forward to mastering the road!" class="sms-button">
         <img src="{% static 'sms.png' %}" alt="SMS" class="sms-icon">
     </a>
 
 </body>
 
-
 <script>
-function smoothScroll(target) {
-  const element = document.querySelector(target);
-  if (element) {
-    element.scrollIntoView({
-      behavior: 'smooth'
-    });
-  }
-}
-
-</script>
+    function smoothScroll(target) {
+        const element = document.querySelector(target);
+        if (element) {
+            element.scrollIntoView({
+            behavior: 'smooth'
+            });
+        }
+    }
+    </script>
 </html>
