@@ -9,7 +9,6 @@ html {
 scroll-behavior: smooth;
 }
 
-
 .full-screen-image {
     width: 100%;
     height: 100vh;
@@ -114,9 +113,6 @@ scroll-behavior: smooth;
         padding-left: 50px;  /* Add padding to the left of the container */
     }
 }
-
-
-
 
 /* Carousel cards */
 .card {
@@ -326,7 +322,6 @@ footer {
     }
 }
 
-
 .contact-detail {
     color: black; /* Ensure text is black */
     font-weight: bold; /* Make the text bold */
@@ -351,7 +346,6 @@ footer {
     width: 100%;
 }
 
-
 .home-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -369,7 +363,6 @@ footer {
 li {
     margin-bottom: 10px; /* Increase the space between bullet points */
 }
-
 
 @media (min-width: 768px) {
     li {
