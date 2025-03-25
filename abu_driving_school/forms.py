@@ -3,8 +3,6 @@ from .models import Review
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
-from django import forms
-from .models import Review
 
 class ReviewForm(forms.ModelForm):
     class Meta:
@@ -35,9 +33,6 @@ class CustomUserCreationForm(UserCreationForm):
         fields = ['username', 'email', 'password1', 'password2']  # Specify the fields to be included
 
 
-from django import forms
-from django.contrib.auth.models import User  # Assuming you're using Django's built-in User model
-
 # Registration Form
 class RegistrationForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
@@ -46,15 +41,13 @@ class RegistrationForm(forms.ModelForm):
         model = User  # or your custom user model
         fields = ['username', 'email', 'password']
 
+
 # Login Form
 class LoginForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
 
 
-# forms.py
-from django import forms
-from django.contrib.auth.models import User
 
 class SignupForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
