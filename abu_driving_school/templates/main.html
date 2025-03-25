@@ -13,29 +13,12 @@
         <title>Abu's Driving School Hertfordshire</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
         <link rel="stylesheet" type="text/css" href="{% static 'css/abu.css' %}">
+        <script src="{% static 'js/main.js' %}"></script>
 
         <!-- Larger Favicon for Google Search Results -->
         <link rel="icon" type="image/png" href="{% static 'favicon-192x192.png' %}" sizes="192x192">
         <link rel="apple-touch-icon" href="{% static 'favicon-180x180.png' %}">
 
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                const links = document.querySelectorAll('nav a');
-                const card = document.querySelector('.card');
-
-                links.forEach(link => {
-                    link.addEventListener('click', function (event) {
-                        const targetId = this.getAttribute('href').substring(1);
-                        const targetSection = document.getElementById(targetId);
-
-                        if (targetSection) {
-                            event.preventDefault();
-                            card.scrollTop = targetSection.offsetTop - card.offsetTop;
-                        }
-                    });
-                });
-            });
-        </script>
     </head>
     <body>
         <div class="container">
@@ -118,36 +101,6 @@
                     <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet">
                     <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
 
-                    <script>
-                        document.addEventListener('DOMContentLoaded', function () {
-                            // Replace with your actual Mapbox access token
-                            mapboxgl.accessToken = 'pk.eyJ1IjoicmFoaW4wMiIsImEiOiJjbThhOHMyZXcxZDN5MnhzYzcycGFkeTJwIn0.U3L_6EUIsD1VmuqjrAwBYg';
-
-                            // Initialize the Mapbox map
-                            const map = new mapboxgl.Map({
-                                container: 'map', // ID of the div
-                                style: 'mapbox://styles/mapbox/streets-v11', // Map style
-                                center: [-0.28070274058493555, 51.77573335660947],
-                                zoom: 10, // Zoom level
-                                attributionControl: false // Disable attribution
-                            });
-
-                            // Add navigation controls (zoom & rotation)
-                            map.addControl(new mapboxgl.NavigationControl());
-
-                            // Function to add markers
-                            function addMarker(coords, popupText) {
-                                new mapboxgl.Marker()
-                                    .setLngLat(coords)
-                                    .setPopup(new mapboxgl.Popup().setHTML(`<b>${popupText}</b>`))
-                                    .addTo(map);
-                            }
-                            addMarker([-0.2231, 51.7634], "We are based in Hatfield");
-                            addMarker([-0.20855686113062374, 51.803775472981485], "We are based in Welwyn Garden City");
-                            addMarker([-0.3428, 51.7527], "We are based in St Albans");
-
-                        });
-                    </script>
                 </div>
             </section>
             <section id="OurStudents" class="section">
@@ -203,14 +156,4 @@
             <img src="{% static 'sms.png' %}" alt="SMS" class="sms-icon">
         </a>
     </body>
-    <script>
-        function smoothScroll(target) {
-            const element = document.querySelector(target);
-            if (element) {
-                element.scrollIntoView({
-                behavior: 'smooth'
-                });
-            }
-        }
-    </script>
 </html>
