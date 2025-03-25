@@ -3,70 +3,64 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Welcome to Abu's Driving School Hertfordshire. We provide expert driving lessons in Hatfield, St Albans, and Welwyn Garden City.">
-    <meta name="keywords" content="Abu's Driving School Hertfordshire, Abu's Driving School, driving school, driving lessons, safe driving, St Albans, Hertfordshire">
-    <meta name="author" content="Abu's Driving School Hertfordshire">
-    <meta name="robots" content="index, follow">
-    <title>Reviews</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/reviews.css' %}">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Welcome to Abu's Driving School Hertfordshire. We provide expert driving lessons in Hatfield, St Albans, and Welwyn Garden City.">
+        <meta name="keywords" content="Abu's Driving School Hertfordshire, Abu's Driving School, driving school, driving lessons, safe driving, St Albans, Hertfordshire">
+        <meta name="author" content="Abu's Driving School Hertfordshire">
+        <meta name="robots" content="index, follow">
+        <title>Reviews</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/reviews.css' %}">
 
-    <!-- Larger Favicon for Google Search Results -->
-    <link rel="icon" type="image/png" href="{% static 'favicon-192x192.png' %}" sizes="192x192">
-    <link rel="apple-touch-icon" href="{% static 'favicon-180x180.png' %}">
+        <!-- Larger Favicon for Google Search Results -->
+        <link rel="icon" type="image/png" href="{% static 'favicon-192x192.png' %}" sizes="192x192">
+        <link rel="apple-touch-icon" href="{% static 'favicon-180x180.png' %}">
 
-</head>
-<body>
-    <div class="container" style="position: relative; padding: 30px;">
-        <a class="home-link" href="{% url 'abu' %}">
-            Back to Home
-        </a>
-        <a class="leave-review" href="{% url 'leave_review' %}">
-            Leave a Review
-        </a>
-
-        <h1>Reviews</h1>
-
-        <!-- Display the total number of reviews aligned to the right -->
-        <p style="text-align: right;">Total number of reviews: <span style="font-weight: bold;">{{ total_reviews }}</span></p>
-
-        {% for review in reviews %}
-            <div class="review-container">
-
-                {% if review.user == request.user %}
-                    <form action="{% url 'delete_review' review.id %}" method="post" class="delete-button-form">
-                        {% csrf_token %}
-                        <button type="submit" class="delete-button">Delete</button>
-                    </form>
-                {% endif %}
-
-                <div class="username-container" style="display: flex; align-items: center; margin-bottom: 10px;">
-                    <i class="fas fa-user" style="margin-right: 5px; color: #666;"></i>
-                    <h4 style="margin: 0;">{{ review.user }}</h4>
+    </head>
+    <body>
+        <div class="container" style="position: relative; padding: 30px;">
+            <a class="home-link" href="{% url 'abu' %}">
+                Back to Home
+            </a>
+            <a class="leave-review" href="{% url 'leave_review' %}">
+                Leave a Review
+            </a>
+            <h1>Reviews</h1>
+            <p style="text-align: right;">Total number of reviews: <span style="font-weight: bold;">{{ total_reviews }}</span></p>
+            
+            {% for review in reviews %}
+                <div class="review-container">
+                    {% if review.user == request.user %}
+                        <form action="{% url 'delete_review' review.id %}" method="post" class="delete-button-form">
+                            {% csrf_token %}
+                            <button type="submit" class="delete-button">Delete</button>
+                        </form>
+                    {% endif %}
+                    
+                    <div class="username-container" style="display: flex; align-items: center; margin-bottom: 10px;">
+                        <i class="fas fa-user" style="margin-right: 5px; color: #666;"></i>
+                        <h4 style="margin: 0;">{{ review.user }}</h4>
+                    </div>
+                    
+                    <p style="margin-bottom: 10px;"><strong>Rating:</strong>
+                        <span style="color: #FFD700; font-size: 1.2em;">
+                            {% for _ in review.rating|to_list %}
+                                <i class="fas fa-star"></i>
+                            {% endfor %}
+                            {% for _ in 5|add:"-review.rating"|to_list %}
+                                <i class="far fa-star"></i>
+                            {% endfor %}
+                        </span>
+                    </p>
+                    <p><strong>Comment:</strong></p>
+                    <p style="white-space: pre-wrap; margin-top: 5px;">{{ review.comment|linebreaksbr }}</p>
                 </div>
+            {% empty %}
+                <p>No reviews yet.</p>
+            {% endfor %}
 
-                <p style="margin-bottom: 10px;"><strong>Rating:</strong>
-                    <span style="color: #FFD700; font-size: 1.2em;">
-                        {% for _ in review.rating|to_list %}
-                            <i class="fas fa-star"></i>
-                        {% endfor %}
-                        {% for _ in 5|add:"-review.rating"|to_list %}
-                            <i class="far fa-star"></i>
-                        {% endfor %}
-                    </span>
-                </p>
-
-                <p><strong>Comment:</strong></p>
-                <p style="white-space: pre-wrap; margin-top: 5px;">{{ review.comment|linebreaksbr }}</p>
-
-            </div>
-        {% empty %}
-            <p>No reviews yet.</p>
-        {% endfor %}
-
-    </div>
-</body>
+        </div>
+    </body>
 </html>

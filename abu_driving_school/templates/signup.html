@@ -2,57 +2,50 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Welcome to Abu's Driving School Hertfordshire. We provide expert driving lessons in Hatfield, St Albans, and Welwyn Garden City.">
-    <meta name="keywords" content="Abu's Driving School Hertfordshire, Abu's Driving School, driving school, driving lessons, safe driving, St Albans, Hertfordshire">
-    <meta name="author" content="Abu's Driving School Hertfordshire">
-    <meta name="robots" content="index, follow">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/signup.css' %}">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Welcome to Abu's Driving School Hertfordshire. We provide expert driving lessons in Hatfield, St Albans, and Welwyn Garden City.">
+        <meta name="keywords" content="Abu's Driving School Hertfordshire, Abu's Driving School, driving school, driving lessons, safe driving, St Albans, Hertfordshire">
+        <meta name="author" content="Abu's Driving School Hertfordshire">
+        <meta name="robots" content="index, follow">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/signup.css' %}">
+        <title>Sign Up</title>
 
-    <title>Sign Up</title>
+        <!-- Larger Favicon for Google Search Results -->
+        <link rel="icon" type="image/png" href="{% static 'favicon-192x192.png' %}" sizes="192x192">
+        <link rel="apple-touch-icon" href="{% static 'favicon-180x180.png' %}">
 
-    <!-- Larger Favicon for Google Search Results -->
-    <link rel="icon" type="image/png" href="{% static 'favicon-192x192.png' %}" sizes="192x192">
-    <link rel="apple-touch-icon" href="{% static 'favicon-180x180.png' %}">
-
-</head>
-<body>
-    <div class="container">
-        <!-- Back to Home link -->
-        <a href="{% url 'abu' %}" class="back-link">Back to Home</a>
-
-        <h1>Sign Up</h1>
-
-        <!-- Display error messages only if the form submission has errors -->
-        {% if form.errors %}
-            <div class="error">
-                {% for field in form %}
-                    {% for error in field.errors %}
-                        <p>{{ error }}</p>
+    </head>
+    <body>
+        <div class="container">
+            <a href="{% url 'abu' %}" class="back-link">Back to Home</a>
+            <h1>Sign Up</h1>
+            <!-- Display error messages only if the form submission has errors -->
+            {% if form.errors %}
+                <div class="error">
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
                     {% endfor %}
-                {% endfor %}
-            </div>
-        {% endif %}
-
-        <!-- Sign-up form -->
-        <form method="POST">
-            {% csrf_token %}
-            <div class="form-group">
-                <input type="text" name="username" placeholder="Username" value="{{ form.username.value }}" required>
-            </div>
-            <div class="form-group">
-                <input type="email" name="email" placeholder="Email" value="{{ form.email.value }}" required>
-            </div>
-            <div class="form-group">
-                <input type="password" name="password" placeholder="Password" required>
-            </div>
-            <button type="submit">Sign Up</button>
-        </form>
-
-        <!-- "Already have an account" link styled as a button -->
-        <a href="{% url 'login' %}" class="login-link">Already have an account? Login here</a>
-    </div>
-</body>
+                </div>
+            {% endif %}
+            
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="text" name="username" placeholder="Username" value="{{ form.username.value }}" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" name="email" placeholder="Email" value="{{ form.email.value }}" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" name="password" placeholder="Password" required>
+                </div>
+                <button type="submit">Sign Up</button>
+            </form>
+            <a href="{% url 'login' %}" class="login-link">Already have an account? Login here</a>
+        </div>
+    </body>
 </html>

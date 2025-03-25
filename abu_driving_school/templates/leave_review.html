@@ -2,74 +2,69 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Welcome to Abu's Driving School Hertfordshire. We provide expert driving lessons in Hatfield, St Albans, and Welwyn Garden City.">
-    <meta name="keywords" content="Abu's Driving School Hertfordshire, Abu's Driving School, driving school, driving lessons, safe driving, St Albans, Hertfordshire">
-    <meta name="author" content="Abu's Driving School Hertfordshire">
-    <meta name="robots" content="index, follow">
-    <title>Leave a Review</title>
-    <!-- Font Awesome for stars -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="icon" type="image/x-icon" href="{% static 'favicon-32x32.ico' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/leave_review.css' %}">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Welcome to Abu's Driving School Hertfordshire. We provide expert driving lessons in Hatfield, St Albans, and Welwyn Garden City.">
+        <meta name="keywords" content="Abu's Driving School Hertfordshire, Abu's Driving School, driving school, driving lessons, safe driving, St Albans, Hertfordshire">
+        <meta name="author" content="Abu's Driving School Hertfordshire">
+        <meta name="robots" content="index, follow">
+        <title>Leave a Review</title>
+        <!-- Font Awesome for stars -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="icon" type="image/x-icon" href="{% static 'favicon-32x32.ico' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/leave_review.css' %}">
 
-    <!-- Larger Favicon for Google Search Results -->
-    <link rel="icon" type="image/png" href="{% static 'favicon-192x192.png' %}" sizes="192x192">
-    <link rel="apple-touch-icon" href="{% static 'favicon-180x180.png' %}">
-
-</head>
-<body>
-    <div class="container">
-        <!-- Link to go back to the reviews list -->
-        <a href="{% url 'reviews' %}" class="back-link">
-            Back to Reviews
-        </a>
-
-        <h1>Leave a Review</h1>
-        <form method="POST" action="{% url 'submit_review' %}">
-            {% csrf_token %}
-            
-            <div class="form-group">
-                <label for="rating">Rating (1 - 5):</label>
-                <!-- Star Rating System -->
-                <div class="rating">
-                    <input type="radio" id="star5" name="rating" value="5">
-                    <label for="star5" title="5 stars">&#9733;</label>
-                    <input type="radio" id="star4" name="rating" value="4">
-                    <label for="star4" title="4 stars">&#9733;</label>
-                    <input type="radio" id="star3" name="rating" value="3">
-                    <label for="star3" title="3 stars">&#9733;</label>
-                    <input type="radio" id="star2" name="rating" value="2">
-                    <label for="star2" title="2 stars">&#9733;</label>
-                    <input type="radio" id="star1" name="rating" value="1">
-                    <label for="star1" title="1 star">&#9733;</label>
+        <!-- Larger Favicon for Google Search Results -->
+        <link rel="icon" type="image/png" href="{% static 'favicon-192x192.png' %}" sizes="192x192">
+        <link rel="apple-touch-icon" href="{% static 'favicon-180x180.png' %}">
+    </head>
+    <body>
+        <div class="container">
+            <a href="{% url 'reviews' %}" class="back-link">
+                Back to Reviews
+            </a>
+            <h1>Leave a Review</h1>
+            <form method="POST" action="{% url 'submit_review' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="rating">Rating (1 - 5):</label>
+                    <!-- Star Rating System -->
+                    <div class="rating">
+                        <input type="radio" id="star5" name="rating" value="5">
+                        <label for="star5" title="5 stars">&#9733;</label>
+                        <input type="radio" id="star4" name="rating" value="4">
+                        <label for="star4" title="4 stars">&#9733;</label>
+                        <input type="radio" id="star3" name="rating" value="3">
+                        <label for="star3" title="3 stars">&#9733;</label>
+                        <input type="radio" id="star2" name="rating" value="2">
+                        <label for="star2" title="2 stars">&#9733;</label>
+                        <input type="radio" id="star1" name="rating" value="1">
+                        <label for="star1" title="1 star">&#9733;</label>
+                    </div>
+                    {% if form.rating.errors %}
+                        <div class="error">
+                            {% for error in form.rating.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
                 </div>
-                {% if form.rating.errors %}
-                    <div class="error">
-                        {% for error in form.rating.errors %}
-                            <p>{{ error }}</p>
-                        {% endfor %}
-                    </div>
-                {% endif %}
-            </div>
-            
-            <div class="form-group">
-                <label for="comment">Comment:</label>
-                {{ form.comment }}
-                {% if form.comment.errors %}
-                    <div class="error">
-                        {% for error in form.comment.errors %}
-                            <p>{{ error }}</p>
-                        {% endfor %}
-                    </div>
-                {% endif %}
-            </div>
-            <div class="form-group">
-                <button type="submit">Submit Review</button>
-            </div>
-        </form>
-    </div>
-</body>
+                <div class="form-group">
+                    <label for="comment">Comment:</label>
+                    {{ form.comment }}
+                    {% if form.comment.errors %}
+                        <div class="error">
+                            {% for error in form.comment.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <button type="submit">Submit Review</button>
+                </div>
+            </form>
+        </div>
+    </body>
 </html>

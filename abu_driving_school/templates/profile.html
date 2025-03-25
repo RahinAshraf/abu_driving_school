@@ -2,36 +2,27 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Welcome to Abu's Driving School Hertfordshire. We provide expert driving lessons in Hatfield, St Albans, and Welwyn Garden City.">
-    <meta name="keywords" content="Abu's Driving School Hertfordshire, Abu's Driving School, driving school, driving lessons, safe driving, St Albans, Hertfordshire">
-    <meta name="author" content="Abu's Driving School Hertfordshire">
-    <meta name="robots" content="index, follow">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Welcome to Abu's Driving School Hertfordshire. We provide expert driving lessons in Hatfield, St Albans, and Welwyn Garden City.">
+        <meta name="keywords" content="Abu's Driving School Hertfordshire, Abu's Driving School, driving school, driving lessons, safe driving, St Albans, Hertfordshire">
+        <meta name="author" content="Abu's Driving School Hertfordshire">
+        <meta name="robots" content="index, follow">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}">
+        <title>My Profile</title>
 
-    <title>My Profile</title>
-
-    <!-- Larger Favicon for Google Search Results -->
-    <link rel="icon" type="image/png" href="{% static 'favicon-192x192.png' %}" sizes="192x192">
-    <link rel="apple-touch-icon" href="{% static 'favicon-180x180.png' %}">
-
-</head>
-<body>
-
-    <div class="container">
-        <!-- Back to Home link -->
-        <a href="{% url 'abu' %}" class="back-link">Back to Home</a>
-
-        <h1>My Profile</h1>
-
-        <p><strong>Username:</strong> {{ user.username }}</p>
-        <p><strong>Email:</strong> {{ user.email }}</p>
-
-        <!-- Logout button -->
-        <button onclick="location.href='{% url 'logout' %}'">Logout</button>
-    </div>
-
-</body>
+        <!-- Larger Favicon for Google Search Results -->
+        <link rel="icon" type="image/png" href="{% static 'favicon-192x192.png' %}" sizes="192x192">
+        <link rel="apple-touch-icon" href="{% static 'favicon-180x180.png' %}">
+    </head>
+    <body>
+        <div class="container">
+            <a href="{% url 'abu' %}" class="back-link">Back to Home</a>
+            <h1>My Profile</h1>
+            <p><strong>Username:</strong> {{ user.username }}</p>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            <button onclick="location.href='{% url 'logout' %}'">Logout</button>
+        </div>
+    </body>
 </html>

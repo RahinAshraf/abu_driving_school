@@ -2,44 +2,41 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Welcome to Abu's Driving School Hertfordshire. We provide expert driving lessons in Hatfield, St Albans, and Welwyn Garden City.">
-    <meta name="keywords" content="Abu's Driving School Hertfordshire, Abu's Driving School, driving school, driving lessons, safe driving, St Albans, Hertfordshire">
-    <meta name="author" content="Abu's Driving School Hertfordshire">
-    <meta name="robots" content="index, follow">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/review_list.css' %}">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Welcome to Abu's Driving School Hertfordshire. We provide expert driving lessons in Hatfield, St Albans, and Welwyn Garden City.">
+        <meta name="keywords" content="Abu's Driving School Hertfordshire, Abu's Driving School, driving school, driving lessons, safe driving, St Albans, Hertfordshire">
+        <meta name="author" content="Abu's Driving School Hertfordshire">
+        <meta name="robots" content="index, follow">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/review_list.css' %}">
+        <title>Reviews</title>
 
-    <title>Reviews</title>
+        <!-- Larger Favicon for Google Search Results -->
+        <link rel="icon" type="image/png" href="{% static 'favicon-192x192.png' %}" sizes="192x192">
+        <link rel="apple-touch-icon" href="{% static 'favicon-180x180.png' %}">
+    </head>
+    <body>
+        <div class="container">
+            <h1>Reviews</h1>
+            {% if reviews %}
+                {% for review in reviews %}
+                    <div class="review">
+                        <h3>{{ review.user }} ({{ review.rating }} stars)</h3>
+                        <p>{{ review.comment }}</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No reviews yet. Be the first to leave a review!</p>
+            {% endif %}
 
-    <!-- Larger Favicon for Google Search Results -->
-    <link rel="icon" type="image/png" href="{% static 'favicon-192x192.png' %}" sizes="192x192">
-    <link rel="apple-touch-icon" href="{% static 'favicon-180x180.png' %}">
-
-</head>
-<body>
-    <div class="container">
-        <h1>Reviews</h1>
-
-        {% if reviews %}
-            {% for review in reviews %}
-                <div class="review">
-                    <h3>{{ review.user }} ({{ review.rating }} stars)</h3>
-                    <p>{{ review.comment }}</p>
-                </div>
-            {% endfor %}
-        {% else %}
-            <p>No reviews yet. Be the first to leave a review!</p>
-        {% endif %}
-
-        <form method="POST">
-            {% csrf_token %}
-            <input type="text" name="user" placeholder="Your Name" required>
-            <input type="number" name="rating" min="1" max="5" placeholder="Rating (1-5)" required>
-            <textarea name="comment" placeholder="Your Review" required></textarea>
-            <button type="submit">Submit Review</button>
-        </form>
-    </div>
-</body>
+            <form method="POST">
+                {% csrf_token %}
+                <input type="text" name="user" placeholder="Your Name" required>
+                <input type="number" name="rating" min="1" max="5" placeholder="Rating (1-5)" required>
+                <textarea name="comment" placeholder="Your Review" required></textarea>
+                <button type="submit">Submit Review</button>
+            </form>
+        </div>
+    </body>
 </html>
