@@ -111,39 +111,9 @@ def submit_review(request):
         if form.is_valid():
             review = form.save(commit=False)
             review.user = request.user
-            # review.save()
-
-            # Prepare the new review object for appending to reviews.json
-            new_review = {
-                "user": review.user.get_full_name() or review.user.username,  # Use full name or username
-                "rating": review.rating,
-                "comment": review.comment
-            }
-
-            REVIEWS_FILE = os.path.join(settings.BASE_DIR, 'reviews.json')
-
-            try:
-                if os.path.exists(REVIEWS_FILE):
-                    with open(REVIEWS_FILE, 'r', encoding='utf-8') as file:
-                        try:
-                            reviews = json.load(file)
-                        except json.JSONDecodeError:
-                            reviews = []
-                else:
-                    reviews = []
-
-                reviews.insert(0, new_review)
-                
-                with open(REVIEWS_FILE, 'w', encoding='utf-8') as file:
-                    json.dump(reviews, file, indent=4)
-
-            except IOError as e:
-                messages.error(request, "There was an error saving your review. Please try again later.")
-                return redirect('reviews')
-
+            review.save()
             messages.success(request, 'Your review has been submitted successfully!')
-            return redirect('reviews')  
-        
+            return redirect('reviews')  # Redirect to reviews page after submission
         else:
             messages.error(request, 'Please correct the errors below.')
     else:
